@@ -47,6 +47,26 @@ public class ExploreDataService {
 
 	private static Logger logger = Logger.getLogger(ExploreDataService.class);
 
+	/**
+	 * 
+	 * @param edaWidgetContentQuery
+	 * @param edaWidgetTitle
+	 * @param edaWidgetCntWidth
+	 * @param edaWidgetCntHeight
+	 * @param datasourceType
+	 * @param datasourceName
+	 * @param cubeName
+	 * @param requestContext
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws OlapException
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws ObjectFactoryException
+	 * @throws PentahoAccessControlException
+	 * @throws DatasourceServiceException
+	 * @throws AccessDeniedException
+	 */
 	public File getEdaWidgetContent(String edaWidgetContentQuery,
 			String edaWidgetTitle, int edaWidgetCntWidth,
 			int edaWidgetCntHeight, String datasourceType,

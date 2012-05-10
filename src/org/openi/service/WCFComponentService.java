@@ -19,7 +19,6 @@ import org.openi.navigator.hierarchy.HierarchyItem;
 import org.openi.navigator.hierarchy.HierarchyNavigator;
 import org.openi.navigator.member.MemberNavigator;
 import org.openi.service.exception.ServiceException;
-import org.openi.util.file.FileUtils;
 import org.openi.util.wcf.WCFUtils;
 import org.openi.wcf.component.WCFComponentType;
 import org.openi.wcf.component.WCFRender;

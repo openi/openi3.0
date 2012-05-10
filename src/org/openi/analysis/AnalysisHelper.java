@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import mondrian.olap.Dimension;
 
 import org.apache.log4j.Logger;
@@ -13,8 +11,6 @@ import org.openi.datasource.Datasource;
 import org.openi.datasource.DatasourceType;
 import org.openi.datasource.MondrianDatasource;
 import org.openi.datasource.XMLADatasource;
-import org.openi.olap.mondrian.MondrianMember;
-import org.openi.olap.xmla.XMLA_Member;
 import org.openi.util.olap.MondrianHelper;
 import org.openi.util.olap.XMLAUtils;
 import org.openi.wcf.WCFHelper;

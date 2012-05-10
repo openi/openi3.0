@@ -7,7 +7,6 @@ import com.tonbeller.jpivot.olap.navi.DrillExpandPosition;
 import com.tonbeller.jpivot.table.span.Span;
 
 /**
- * Created on 29.11.2002
  * 
  * @author av
  * @author SUJEN

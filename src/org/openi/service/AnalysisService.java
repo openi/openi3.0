@@ -247,6 +247,13 @@ public class AnalysisService {
 		return AnalysisHelper.buildSlicerAsString(olapModel);
 	}
 	
+	/**
+	 * 
+	 * @param pivotID
+	 * @param context
+	 * @return
+	 * @throws Exception
+	 */
 	public List<SlicerValue> getSlicerValueObjects(String pivotID,
 			RequestContext context) throws Exception {
 		OlapModel olapModel = (OlapModel) context.getSession().getAttribute(
@@ -258,6 +265,13 @@ public class AnalysisService {
 		return AnalysisHelper.buildSlicerAsObjects(olapModel);
 	}
 
+	/**
+	 * 
+	 * @param pivotID
+	 * @param context
+	 * @return
+	 * @throws Exception
+	 */
 	public String printAnalysisReport(String pivotID, RequestContext context)
 			throws Exception {
 		Map loadedAnalyses = (Map) context.getSession().getAttribute(
@@ -371,6 +385,17 @@ public class AnalysisService {
 		return htmlStr;
 	}
 
+	/**
+	 * 
+	 * @param pivotID
+	 * @param filename
+	 * @param solution
+	 * @param path
+	 * @param type
+	 * @param overwrite
+	 * @param context
+	 * @throws Exception
+	 */
 	public void saveAnalysisReport(String pivotID, String filename,
 			String solution, String path, String type, boolean overwrite,
 			RequestContext context) throws Exception {
