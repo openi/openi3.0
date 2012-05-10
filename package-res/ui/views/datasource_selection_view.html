@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>OpenI Analysis</title>
+		
+		<link href="styles/openistyles.css" rel="stylesheet" />
+		<link href="styles/jquery/smoothness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+		<link href="styles/jquery/uniform.default.css" rel="stylesheet" />
+		
+		<!-- JPivot CSS Files -->
+		<link href="jpivot/navi/mdxnavi.css" rel="stylesheet" />
+		<link href="jpivot/table/mdxtable.css" rel="stylesheet" />
+		
+		<script type="text/javascript" src="scripts/jquery/jquery.js"></script>
+		<script type="text/javascript" src="scripts/jquery/jquery.ui.js"></script>
+		<script type="text/javascript" src="scripts/jquery/jquery.blockUI.2.3.7.js"></script>
+		<script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="scripts/jquery/aop.js"></script>
+		<script type="text/javascript" src="scripts/jquery/jquery.ba-throttle-debounce.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery/jquery.uniform.js"></script>
+		
+		<script type="text/javascript" src="scripts/openi/Ajax.js"></script>
+		<script type="text/javascript" src="scripts/openi/AjaxIndicator.js"></script>
+		<script type="text/javascript" src="scripts/openi/OpenIAnalysis.js"></script>
+		<script type="text/javascript" src="scripts/openi/ComponentRenderer.js"></script>
+		<script type="text/javascript" src="scripts/openi/Rest.js"></script>
+		<script type="text/javascript" src="scripts/openi/OlapActions.js"></script>
+		
+		<style>
+			body {
+				font-size: 11px;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+				margin: 0 1px 1px;
+				background: #FFF;
+			}
+			
+			fieldset {
+				border: 0px;
+			}
+			
+			.openi-popup-dialog {
+				-moz-border-bottom-colors: none;
+			    -moz-border-image: none;
+			    -moz-border-left-colors: none;
+			    -moz-border-right-colors: none;
+			    -moz-border-top-colors: none;
+			    -moz-transition: visibility 0s linear 100ms, -moz-transform 200ms ease-out 0s;
+			    background: none repeat scroll 0 0 #FFFFFF;
+			    border-bottom: 1px solid #C1C1C1;
+			    border-left: 1px solid #C1C1C1;
+			    border-top: 1px solid #C1C1C1;
+			    box-shadow: 0 0 13px rgba(0, 0, 0, 0.31);
+			    padding: 0px;
+			}
+			
+			.openi-popup-dialog-hdr {
+				background: -moz-linear-gradient(center top , #F6F8F8, #E9EEEE) repeat scroll 0 0 transparent;
+				background: -webkit-gradient(linear, center top, center bottom, from(#F6F8F8), to(#E9EEEE));
+			    border-color: -moz-use-text-color -moz-use-text-color #DDDDDD;
+			    border-style: none none solid;
+			    border-top-left-radius: 4px;
+			    border-top-right-radius: 4px;
+			    border-width: 0 0 1px;
+			    color: #111111;
+			    font-weight: bold;
+			    padding: 12px 10px 9px;
+			    text-shadow: 1px 1px 0 #FFFFFF;
+			}
+			
+			.openi-btn {
+			    background: url("images/btn-bg.png") repeat-x scroll 0 0 transparent;
+			    border: 1px solid #6E93B0;
+			    border-radius: 2px 2px 2px 2px;
+			    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+			    color: #234E70;
+			    display: inline;
+			    float: left;
+			    font-size: 1em;
+			    height: 27px;
+			    line-height: 26px;
+			    padding: 0px;
+			    padding-left: 3px;
+			    padding-right: 3px;
+			    margin-right: 5px;
+			    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+			    cursor: pointer;
+			}
+			
+			#buttons-bar {
+				padding: 5px;
+				margin-right: 10px;
+			}
+			
+			#buttons-bar button {
+				float: right;
+			}
+			
+			#measures-box {
+				background: #FFF;
+				border: 1px solid #CCC;
+				min-height: 20px;
+				padding: 3px;
+			}
+		</style>
+		
+		<script>
+			jQuery(document).ready(function() {
+				jQuery("#ds-selection-dialog").dialog({
+					width: 380,
+					modal: true,
+					resizable: false
+				});
+				
+				jQuery("#create-new-analysis-btn").click(function(){
+					var datasourceType = jQuery("#select-datasource-type").val();
+					var datasource = jQuery("#select-datasource").val();
+					var cube = jQuery("#select-cube").val();
+					if(datasource != "Select Catalog" && cube != "Select Cube") {
+						var selectedMeasuresList = getSelectedMeasuresList();
+						if(selectedMeasuresList == "")
+							return false;
+						window.location.href = Rest.constructBaseURL() + "/openianalysis/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=new&selectedMeasures=" + selectedMeasuresList;
+					}
+					return false;
+				});
+				
+				jQuery("#explore-data-btn").click(function(){
+					var datasourceType = jQuery("#select-datasource-type").val();
+					var datasource = jQuery("#select-datasource").val();
+					var cube = jQuery("#select-cube").val();
+					if(datasource != "Select Catalog" && cube != "Select Cube") {
+						var selectedMeasuresList = getSelectedMeasuresList();
+						if(selectedMeasuresList == "")
+							return false;
+						window.location.href = Rest.constructBaseURL() + "/openianalysis/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=explore&selectedMeasures=" + selectedMeasuresList;
+					}
+					return false;
+				});
+				
+				jQuery("#ds-selection-dialog").prev().addClass("openi-popup-dialog-hdr");
+				jQuery("#ds-selection-dialog").parent().addClass("openi-popup-dialog");
+
+				jQuery("input[type='checkbox'], input[type='text'], textarea, select").uniform();
+				
+				jQuery("button").addClass("openi-btn");
+				
+				jQuery("#select-datasource").change(function() {
+					var selectedDatasource = jQuery(this).val();
+					var selectedDatasourceType = jQuery("#select-datasource-type").val();
+					if(selectedDatasource != "Select Catalog") {
+						populateCubes(selectedDatasourceType, selectedDatasource);
+					}
+					else {
+						jQuery("#select-cube").find("option").remove();
+						jQuery("#select-cube").append(jQuery("<option></option>").val("Select Cube").html("Select Cube"));
+						jQuery.uniform.update("#select-cube"); 
+					}
+					return false;
+				});
+				
+				jQuery("#select-cube").change(function() {
+					var selectedCube = jQuery(this).val();
+					var selectedDatasourceType = jQuery("#select-datasource-type").val();
+					var selectedDatasource = jQuery("#select-datasource").val();
+					if(selectedCube != "Select Cube")
+						populateMeasures(selectedDatasourceType, selectedDatasource, selectedCube);
+					else {
+						jQuery("#measures-box").empty();
+						jQuery("#measures-box input[type='checkbox']").uniform();
+					}
+					return false;
+				});
+
+				populateDatasources();
+			});
+
+			function populateCubes(datasourceType, datasource) {
+				var requestType = "GET";
+				var actionPath = datasourceType + "/datasources/" + datasource + "/cubes/";
+				var dataParams = {
+				};
+				var asyncType = false;
+				var restResourcePath = Rest.OLAP_DISCOVER_RESOURCE_PATH + actionPath;
+				var cubes = Rest.sendRequest(restResourcePath, dataParams, requestType, asyncType);
+				jQuery("#select-cube").find("option").remove();
+				jQuery("#select-cube").append(jQuery("<option></option>").val("Select Cube").html("Select Cube"));
+				jQuery(cubes).each(function(key, cubeName) {
+					jQuery("#select-cube").append(jQuery("<option></option>").val(cubeName).html(cubeName));
+				});
+				jQuery.uniform.update("#select-cube"); 
+			}
+			
+			function populateMeasures(datasourceType, datasource, cube) {
+				var requestType = "GET";
+				var actionPath = datasourceType + "/datasources/" + datasource + "/" + cube + "/measures/";
+				var dataParams = {
+				};
+				var asyncType = false;
+				var restResourcePath = Rest.OLAP_DISCOVER_RESOURCE_PATH + actionPath;
+				var measures = Rest.sendRequest(restResourcePath, dataParams, requestType, asyncType);
+				jQuery("#measures-box").empty();
+				var measuresBoxHTML = '';
+				jQuery(measures).each(function(key, measure) {
+					measuresBoxHTML += '<div>';
+					measuresBoxHTML += '<input type="checkbox" name="' + measure + '" id="' + measure+ '" value="' + measure + '" checked="" />';
+					measuresBoxHTML += measure;
+					measuresBoxHTML += '</div>';
+				});
+				jQuery("#measures-box").append(measuresBoxHTML);
+				jQuery("#measures-box input[type='checkbox']").uniform();
+			}
+			
+			function getSelectedMeasuresList() {
+				var selectedMeasures = '';
+				jQuery("#measures-box input[type='checkbox']").each(function(){
+					if(jQuery(this).is(':checked'))
+						selectedMeasures += jQuery(this).val() + ",";
+				});
+				return selectedMeasures.substring(0, selectedMeasures.lastIndexOf(","));
+			}
+		</script>
+	</head>
+	<body>
+		<div id="ds-selection-dialog" title="New OpenI Analysis">
+			<form>
+				<fieldset>
+					<table cellspacing="5" cellpadding="2" border="0">
+						<tr>
+							<td>
+								<label for="select-datasource-type">Datasource Type: </label>
+							</td>
+							<td>
+								<select id="select-datasource-type">
+									<option value="Select Datasource Type">Select Datasource Type</option>
+									<option value="MONDRIAN">MONDRIAN</option>
+									<option value="XMLA">XMLA</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="select-datasource">Catalog: </label>
+							</td>
+							<td>
+								<select id="select-datasource">
+									<option value="">Select Catalog</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="select-cube">Cube: </label>
+							</td>
+							<td>
+								<select id="select-cube">
+									<option value="">Select Cube</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td style="vertical-align: top">
+								<label for="measures-box">Measures: </label>
+							</td>
+							<td>
+								<div id="measures-box"></div>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+			<div id="buttons-bar">
+				<button id="explore-data-btn" class="openi-btn">Explore</button>
+				<button id="create-new-analysis-btn" class="openi-btn">Create</button>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openiacl>
+	<rule applyBy="ROLE" applyTo="Authenticated" applicableItemType="DATASOURCE" access="false">
+		<applicable-items-list>
+			<item-identifier>openi-ds</item-identifier>
+		</applicable-items-list>
+	</rule>
+	<rule applyBy="ROLE" applyTo="openi" applicableItemType="DATASOURCE" access="true">
+		<applicable-items-list>
+			<item-identifier>openi-ds</item-identifier>
+		</applicable-items-list>
+	</rule>
+</openiacl>

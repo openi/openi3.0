@@ -1,0 +1,38 @@
+th.navi-axis {
+  background : -moz-linear-gradient(center top , #FFFFFF 0%, #F0F0F0 100%) repeat scroll 0 0 transparent;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  color : Black;
+  text-align: left;
+  vertical-align: middle;
+  height: 35px;
+  padding-left: 5px;
+}
+
+td.navi-hier {
+  background-color : #ffffff;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;;
+  color : Black;
+  text-align: left;
+}
+
+td.navi-buttons {
+  text-align: right;
+}
+
+
+td.member-node-odd {
+  background-color : #ffffff;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;;
+  color : Black;
+  text-align: left;
+}
+
+td.member-node-even {
+  background-color : #DEE3EF;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;;
+  color : Black;
+  text-align: left;
+}

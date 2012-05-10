@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<?cocoon-format type="text/xslfo"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="simple"
+			margin="1cm" page-height="297mm" page-width="210mm">
+			<fo:region-body margin-bottom="1.5cm" margin-top="1.5cm" />
+			<fo:region-before extent="1cm" />
+			<fo:region-after extent="1cm" />
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+	<fo:page-sequence master-reference="simple">
+		<fo:static-content flow-name="xsl-region-before">
+			<fo:block border-bottom-width="1pt" border-bottom-style="solid"
+				border-bottom-color="black" font-weight="bold" font-size="8pt">
+				<fo:retrieve-marker retrieve-class-name="page-head" />
+			</fo:block>
+		</fo:static-content>
+		<fo:static-content flow-name="xsl-region-after">
+			<fo:block padding-top="3pt" font-weight="bold" font-size="8pt"
+				text-align="center">
+				<fo:inline font-style="italic"> INSERT FOOTER TEXT HERE</fo:inline>
+			</fo:block>
+		</fo:static-content>
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block font-size="8pt"
+				font-family="Verdana, Geneva, Arial, Helvetica, sans-serif">
+				<fo:block>
+					<fo:marker marker-class-name="page-head">
+						<fo:table table-layout="fixed" width="100%">
+							<fo:table-column column-width="proportional-column-width(4)" />
+							<fo:table-column column-width="proportional-column-width(1)" />
+							<fo:table-body>
+								<fo:table-row>
+									<fo:table-cell>
+										<fo:block text-align="left">
+											HEADER TEXT (e.g Company Name)
+										</fo:block>
+									</fo:table-cell>
+									<fo:table-cell>
+										<fo:block text-align="right">
+											Page
+											<fo:page-number />
+										</fo:block>
+									</fo:table-cell>
+								</fo:table-row>
+							</fo:table-body>
+						</fo:table>
+					</fo:marker>
+				</fo:block>
+				<fo:block font-size="12pt" font-weight="bold" text-align="center"
+					space-after="1em" />
+				<fo:block text-align="center" space-after="8em">
+					<fo:external-graphic scaling="uniform"
+						content-height="251px" content-width="1049px"
+						src="url('http://localhost:8090/pentaho/content/openianalytics/api/wcfCompResource/wcfChartComp?pivotID=9a4fc91e-f973-11e0-a970-a71ea8bdce5b')" />
+				</fo:block>
+				<fo:block font-size="10pt">
+					<fo:table table-layout="fixed" width="100%">
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-column column-width="proportional-column-width(1)" />
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="2"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#FFFFFF">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" />
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="4"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">Markets</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">Product</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">Time</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">APAC</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">EMEA</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">Japan</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm">NA</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Classic Cars</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">115,011</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">691,273</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">120,696</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">587,428</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">199,372</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">1,015,790</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">42,071</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">581,043</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">97,574</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">384,538</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">18,835</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">237,791</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Motorcycles</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">60,789</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">141,836</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">16,485</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">178,109</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">63,159</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">204,042</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">31,959</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">291,421</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">65,870</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">161,260</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">4,176</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">55,020</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Planes</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">42,663</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">154,519</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">60,556</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">90,016</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">67,681</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">209,128</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">49,177</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">202,942</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">11,082</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">128,008</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">&#160;</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">60,985</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Ships</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">&#160;</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">172,428</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">14,156</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">58,238</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">35,323</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">186,992</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">10,453</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">142,904</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">3,070</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">67,845</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">8,407</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">48,856</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Trains</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">1,681</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">29,538</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">13,279</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">28,304</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">8,226</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">90,973</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">&#160;</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">25,551</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">&#160;</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">17,995</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">3,524</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">15,398</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Trucks and Buses</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">11,298</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">228,699</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">44,498</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">135,936</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">80,634</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">185,421</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">13,349</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">252,572</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">53,735</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">86,859</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">&#160;</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">61,281</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="3" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">Vintage Cars</fo:block>
+								</fo:table-cell>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2003</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">111,639</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">263,695</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">22,888</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">281,727</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#dee3ef">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2004</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">147,212</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">504,062</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">21,470</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#FFFFFF">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">324,815</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell number-columns-spanned="1"
+									number-rows-spanned="1" border-style="solid" border-width="0.2mm"
+									background-color="#eef3ff">
+									<fo:block text-align="left" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.5mm"
+										space-after="0.5mm" text-indent="0mm">2005</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">105,688</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">83,324</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">7,979</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border="solid black 0.5pt" padding="2pt"
+									border-collapse="collapse" background-color="#f0f0f0">
+									<fo:block text-align="right" padding="2pt" font-size="10pt"
+										font-family="serif" line-height="14pt" space-before="0.2mm"
+										space-after="0.2mm" text-indent="1mm">191,727</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+				</fo:block>
+			</fo:block>
+			<fo:block text-align="center" id="EndOfDocument" />
+		</fo:flow>
+	</fo:page-sequence>
+</fo:root>

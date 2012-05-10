@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xtable-component
+	closeId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.close"
+	editId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.edit"
+	title="Drill Through Table" visibleColumns="13">
+	<xtr>
+		<xth id="wcfa81157ab" sort="dc">Territory</xth>
+		<xth id="wcfaa1a107b" sort="dn">Country</xth>
+		<xth id="wcfa9921225" sort="dn">State_x0020_Province</xth>
+		<xth id="wcf50a4bd75" sort="dn">City</xth>
+		<xth id="wcffac451ff" sort="dn">Customer</xth>
+		<xth id="wcf32cd6b47" sort="dn">Line</xth>
+		<xth id="wcf20ffe0d7" sort="dn">Vendor</xth>
+		<xth id="wcf6eb2fcdc" sort="dn">Product</xth>
+		<xth id="wcf931189fb" sort="dn">Years</xth>
+		<xth id="wcf5685e0a8" sort="dn">Quarters</xth>
+		<xth id="wcf47a62a12" sort="dn">Months</xth>
+		<xth id="wcfed4fa1a2" sort="dn">Type</xth>
+		<xth id="wcf71ecbbf1" sort="dn">Sales</xth>
+	</xtr>
+	<xtr>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+		<xtd align="left">33</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Autoart Studio Design</xtd>
+		<xtd align="left">1968 Ford Mustang</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR4</xtd>
+		<xtd align="left">Nov</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">5019.9</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Carousel DieCast Legends</xtd>
+		<xtd align="left">1966 Shelby Cobra 427 S/C</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">2671.95</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Classic Metal Creations</xtd>
+		<xtd align="left">1949 Jaguar XK 120</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">1545.6</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Classic Metal Creations</xtd>
+		<xtd align="left">1957 Corvette Convertible</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR4</xtd>
+		<xtd align="left">Nov</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">4910.4</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Classic Metal Creations</xtd>
+		<xtd align="left">1961 Chevrolet Impala</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR4</xtd>
+		<xtd align="left">Nov</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">2269.92</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Classic Metal Creations</xtd>
+		<xtd align="left">1965 Aston Martin DB5</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">5848.68</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Exoto Designs</xtd>
+		<xtd align="left">1952 Citroen-15CV</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">4392.12</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Exoto Designs</xtd>
+		<xtd align="left">1969 Chevrolet Camaro Z28</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">2282.22</xtd>
+	</xtr>
+	<xtr>
+		<xtd align="left">APAC</xtd>
+		<xtd align="left">Australia</xtd>
+		<xtd align="left">NSW</xtd>
+		<xtd align="left">North Sydney</xtd>
+		<xtd align="left">Anna's Decorations, Ltd</xtd>
+		<xtd align="left">Classic Cars</xtd>
+		<xtd align="left">Gearbox Collectibles</xtd>
+		<xtd align="left">1948 Porsche Type 356 Roadster</xtd>
+		<xtd align="left">2003</xtd>
+		<xtd align="left">QTR3</xtd>
+		<xtd align="left">Sep</xtd>
+		<xtd align="left">Shipped</xtd>
+		<xtd align="left">3639.44</xtd>
+	</xtr>
+	<xtr>
+		<xtd colspan="13">
+			 Page 1/4 
+			<xpagenav direction="next" id="wcf686318b3" page="2" />
+			<xpagenav direction="last" id="wcf1c09d53a" page="4" />
+			 
+			<xgotopage
+				buttonId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.goto.button"
+				inputId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.goto.input"
+				label="Goto Page" value="1" />
+			 
+			<xgotopage
+				buttonId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.pageSize.button"
+				inputId="xmlaQueryf377bdbd-e359-11e0-8f6c-859cd08d0230.drillthroughtable.pageSize.input"
+				label="Rows/page" value="10" />
+		</xtd>
+	</xtr>
+</xtable-component>

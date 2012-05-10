@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>OpenI Analysis</title>
+
+<link href="styles/openistyles.css" rel="stylesheet" />
+<link href="styles/jquery/smoothness/jquery-ui-1.8.13.custom.css"
+	rel="stylesheet" />
+<link href="styles/jquery/uniform.default.css" rel="stylesheet" />
+<link href="styles/jquery/jquery.contextMenu.css" rel="stylesheet" />
+
+<!-- JPivot CSS Files -->
+<link href="jpivot/navi/mdxnavi.css" rel="stylesheet" />
+<link href="jpivot/table/mdxtable.css" rel="stylesheet" />
+
+<script type="text/javascript" src="scripts/jquery/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery.ui.js"></script>
+<script type="text/javascript"
+	src="scripts/jquery/jquery.blockUI.2.3.7.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
+<script type="text/javascript" src="scripts/jquery/aop.js"></script>
+<script type="text/javascript"
+	src="scripts/jquery/jquery.ba-throttle-debounce.min.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery.uniform.js"></script>
+<script type="text/javascript"
+	src="scripts/jquery/jquery.contextMenu.js"></script>
+
+<script type="text/javascript" src="scripts/openi/Ajax.js"></script>
+<script type="text/javascript" src="scripts/openi/AjaxIndicator.js"></script>
+<script type="text/javascript" src="scripts/openi/OpenIAnalysis.js"></script>
+<script type="text/javascript" src="scripts/openi/ComponentRenderer.js"></script>
+<script type="text/javascript" src="scripts/openi/Rest.js"></script>
+<script type="text/javascript" src="scripts/openi/OlapActions.js"></script>
+
+<style>
+body {
+	font-size: 11px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin: 0 1px 1px;
+	background: #FFF;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+li {
+	margin: 3px;
+	padding: 5px;
+}
+
+#sidebar {
+	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#ECECEC));
+    border-color: #E9E9E9 #E9E9E9 #F5F5F5;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+#show-sidebar {
+	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#ECECEC));
+    border-color: #E9E9E9 #E9E9E9 #F5F5F5;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    width: 19px;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+#main-panel {
+    background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#ECECEC));
+    border-color: #E9E9E9 #E9E9E9 #F5F5F5;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    padding-top: 5px;
+}
+
+.Filter-category, .Rows-category, .Columns-category {
+	margin: 0px;
+	padding: 5px;
+	overflow: auto;
+	background: #FFF;
+	border: 1px solid #CCC;
+}
+
+.navi-axis {
+	height: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.ui-widget {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 11px;
+}
+
+.ui-tabs .ui-tabs-panel {
+	background: none repeat scroll 0 0 transparent;
+	border-width: 0;
+	display: block;
+	padding: 3px;
+}
+
+.ui-state-highlight {
+	height: 15px;
+}
+
+.ui-dialog {
+	width: 500px;
+	height: 350px;
+}
+
+.drop-menu {
+	background: #E6E6E6;
+	border: 1px solid #D3D3D3;
+	font-size: 11px;
+	display: none;
+	position: absolute;
+	z-index: 10;
+}
+
+#member-navigator-popup {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #CCCCCC;
+	box-shadow: 0 0 13px rgba(0, 0, 0, 0.31);
+	display: none;
+	height: 100%;
+	padding: 15px;
+	position: absolute;
+	text-align: left;
+	width: 100%;
+	z-index: 10;
+}
+
+#member-navigator-container {
+	overflow: hidden;
+	height: 342px;
+}
+
+#mem-tree-container {
+	height: 307px;
+}
+
+.ui-state-disabled {
+	opacity: 0.65;
+}
+
+#Rows-category {
+	padding: 2px;
+}
+
+#Columns-category {
+	padding: 2px;
+}
+
+#Filter-category {
+	padding: 2px;
+}
+
+.drag-false {
+	background-image: none;
+	opacity: 0.7;
+}
+
+#configure-dialog {
+	background: none repeat scroll 0 0 #F9F9F9;
+}
+
+#configure-tabs {
+	border: 0px;
+	padding: 0px;
+}
+
+#export-fmt-selection-menu {
+	float: right;
+	width: 75px;
+	margin-top: 28px;
+	background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll
+		0 0 transparent;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#ECECEC));
+}
+
+#export-fmt-selection-menu a {
+	text-decoration: none;
+	color: #000;
+}
+
+#export-fmt-selection-menu ul li {
+	cursor: pointer;
+}
+
+#export-fmt-selection-menu ul li:hover {
+	background: url("images/btn-bg.png") repeat-x scroll 0 0 transparent;
+	border: 1px solid #6E93B0;
+	border-radius: 2px 2px 2px 2px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.configure-dialog-tab {
+	background: none repeat scroll 0 0 #FFFFFF;
+	height: 300px;
+}
+
+.openi-popup-dialog {
+	-moz-border-bottom-colors: none;
+	-moz-border-image: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	-moz-transition: visibility 0s linear 100ms, -moz-transform 200ms
+		ease-out 0s;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-bottom: 1px solid #C1C1C1;
+	border-left: 1px solid #C1C1C1;
+	border-top: 1px solid #C1C1C1;
+	box-shadow: 0 0 13px rgba(0, 0, 0, 0.31);
+	padding: 0px;
+}
+
+.openi-popup-dialog-hdr {
+	background: -moz-linear-gradient(center top, #F6F8F8, #E9EEEE) repeat
+		scroll 0 0 transparent;
+	background: -webkit-gradient(linear, center top, center bottom, from(#F6F8F8), to(#E9EEEE));
+	border-color: -moz-use-text-color -moz-use-text-color #DDDDDD;
+	border-style: none none solid;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-width: 0 0 1px;
+	color: #111111;
+	font-weight: bold;
+	padding: 12px 10px 9px;
+	text-shadow: 1px 1px 0 #FFFFFF;
+}
+
+.openi-btn {
+	background: url("images/btn-bg.png") repeat-x scroll 0 0 transparent;
+	border: 1px solid #6E93B0;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	color: #234E70;
+	display: inline;
+	float: left;
+	font-size: 1em;
+	height: 27px;
+	line-height: 26px;
+	padding: 0px;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-right: 5px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+}
+
+#chart-form-container .selector span {
+	width: 50px;
+}
+
+#chart-form-container .selector {
+	width: 80px;
+}
+
+#chart-form-container .selector select {
+	width: 80px;
+	min-width: 80px;
+}
+
+#chart-form-container input[type='text'] {
+	width: 90px;
+}
+
+#table-chart-tabs {
+	border: 1px solid #CCC;
+}
+
+div.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+	cursor: se-resize;
+	width: 12px;
+	height: 12px;
+	right: 1px;
+	bottom: 1px;
+	position: absolute;
+	font-size: 0.1px;
+	z-index: 99999;
+	display: block;
+	background-image: url("styles/jquery/smoothness/images/ui-icons_222222_256x240.png");
+	background-position: -64px -224px;
+}
+
+#hide-sidebar {
+}
+
+#show-sidebar { position:inherit; z-index:2; left:0; float:left; display:none; width:0px; height:100%; cursor:pointer;}
+
+</style>
+
+
+<script>
+	var pivotID;
+	jQuery(document).ready(function() {
+		pivotID = "PARAM_pivotID";
+		OpenIAnalysis.initialize(pivotID);
+	});
+</script>
+<script type="text/javascript" src="scripts/pentaho/PUC.js"></script>
+
+</head>
+<body>
+	<!-- <form action="#" method="post"> -->
+	<table id="analysis-report-container" width="100%" height="100%">
+		<tr style="height: 100%">
+			<td>
+				<div id="sidebar">
+					<div><img id="hide-sidebar-icon" src="images/sidebar-collapse-icon.png" style="float: right; cursor: pointer; margin-top: 5px;" title="Hide Navigator Panel"/></div>
+					<div id="navigator-container">Navigator Component is rendered here</div>
+				</div>
+				<div id="show-sidebar"><img id="show-sidebar-icon" src="images/sidebar-expand-icon.png" style="float: left;margin-top: 5px; cursor: pointer" title="Show Navigator Panel"/></div>
+			</td>
+			<td id="main-panel">
+				<div id="top-bar">
+					<span style="padding-top: 3px; float: left; margin-left: 3px;">PARAM_analysisTitle</span>
+					<!-- <button id="save-btn">&nbsp;</button> -->
+					<button id="refresh-btn">&nbsp;</button>
+					<button id="print-btn">&nbsp;</button>
+				</div>
+				<div>
+					<div class="toolbar">
+						<div style="width: auto; float: left; margin: 2px; padding: 5px;">
+							<input type="checkbox" name="swapAxes-chk-box"
+								id="swapAxes-chk-box" PARAM_doSwapAxes />Swap Axes&nbsp; <input
+								type="checkbox" name="hideEmptyRowsCols-chk-box"
+								id="hideEmptyRowsCols-chk-box" PARAM_hideEmptyRowsCols />Hide
+							Empty Rows/Cols&nbsp; <input type="checkbox"
+								name="setAxisStyle-chk-box" id="setAxisStyle-chk-box"
+								PARAM_setAxisStyle />Hierarchy&nbsp; <input type="checkbox"
+								name="showTable-chk-box" id="showTable-chk-box" PARAM_showTable />Show
+							Table&nbsp; <input type="checkbox" name="showChart-chk-box"
+								id="showChart-chk-box" PARAM_showChart />Show Chart&nbsp;
+						</div>
+						<div style="float: right; padding-top: 3px;">
+							<button id="export-btn" class="openi-btn">Export</button>
+							<button id="configure-btn" class="openi-btn">Configure</button>
+							<div id="export-fmt-selection-menu" class="drop-menu">
+								<ul>
+									<li id="export-to-pdf"><img src="images/pdf-icon.png" />&nbsp;PDF</li>
+									<li id="export-to-xls"><img src="images/excel-icon.png" />&nbsp;Excel</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="table-chart-tabs">
+						<ul>
+							<li><a href="#table-chart-tabs-1"><strong>Table</strong></a></li>
+							<li><a href="#table-chart-tabs-2"><strong>Chart</strong></a></li>
+						</ul>
+						<div id="table-chart-tabs-1">
+							<div class="toolbar slicer-value-container" 
+								style="padding: 7px;  padding-top: 0px; padding-bottom: 0px;margin-top: 2px; margin-bottom: 4px;min-height: 32px;">
+								<div style="width: auto; float: left; margin: 2px; padding: 5px;">
+								Drill:&nbsp; <input type="checkbox"
+									name="showHideHierarchy-chk-box" id="showHideHierarchy-chk-box"
+									PARAM_showHideHierarchy />Hierarchy&nbsp; <input
+									type="checkbox" name="replace-chk-box" id="replace-chk-box"
+									PARAM_doReplace />Replace&nbsp; <input type="checkbox"
+									name="dataReport-chk-box" id="dataReport-chk-box"
+									PARAM_dataReport />Data Report&nbsp; <!-- (<a href="#"
+									onclick="OpenIAnalysis.showSlicerValueDialog(); return false;"><strong>Click
+										here</strong></a> to see the selected slicer value) -->
+								</div>
+							</div>
+							<div id="table-container">Table Component is rendered here
+							</div>
+						</div>
+						<div id="table-chart-tabs-2">
+							<div class="toolbar slicer-value-container"
+								style="padding: 7px;  padding-top: 0px; padding-bottom: 0px;margin-top: 2px; margin-bottom: 4px;min-height: 32px;">
+								<!-- (<a href="#"
+									onclick="OpenIAnalysis.showSlicerValueDialog(); return false;"><strong>Click
+										here</strong></a> to see the selected slicer value) -->
+								<div style="float: right; margin-top: 4px;">
+
+									<!-- 
+											<button id="chart-btn">Bar Chart</button>- 
+											<div id="chart-selection-menu" class="drop-menu" style="float: right">
+												<ul>
+													<li>Column Chart</li>
+													<li>Stacked Column Chart</li>
+													<li>Bar Chart</li>
+													<li>Stacked Bar Chart</li>
+													<li>Line Chart</li>
+													<li>Vertical Area Chart</li>
+													<li>Horizontal Area Chart</li>
+													<li>Vertical Stacked Area Chart</li>
+													<li>Horizontal Stacked Area Chart</li>
+													<li>Pie By Column</li>
+													<li>Pie By Row</li>
+												</ul>
+											</div>
+											 -->
+									<select name="chart-selection-menu" id="chart-selection-menu"
+										style="float: right">
+										<option value="1" PARAM_chartType_1>Column Chart</option>
+										<option value="5" PARAM_chartType_5>Stacked Column
+											Chart</option>
+										<option value="3" PARAM_chartType_3>Bar Chart</option>
+										<option value="7" PARAM_chartType_7>Stacked Bar Chart</option>
+										<option value="9" PARAM_chartType_9>Line Chart</option>
+										<option value="11" PARAM_chartType_1_1>Vertical Area
+											Chart</option>
+										<option value="12" PARAM_chartType_1_2>Horizontal Area
+											Chart</option>
+										<option value="13" PARAM_chartType_1_3>Vertical
+											Stacked Area Chart</option>
+										<option value="14" PARAM_chartType_1_4>Horizontal
+											Stacked Area Chart</option>
+										<option value="15" PARAM_chartType_1_5>Pie By Column</option>
+										<option value="16" PARAM_chartType_1_6>Pie By Row</option>
+									</select>
+								</div>
+							</div>
+							<div id="chart-container">
+								<img id="chart" src="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div id="configure-dialog" title="Configure">
+		<div id="configure-tabs">
+			<ul>
+				<li><a href="#configure-chart-tab"><strong>Chart</strong></a></li>
+				<li><a href="#configure-mdx-tab"><strong>MDX</strong></a></li>
+				<li><a href="#configure-pdf-tab"><strong>Print</strong></a></li>
+				<li><a href="#configure-sort-tab"><strong>Sort</strong></a></li>
+			</ul>
+			<div id="configure-chart-tab" class="configure-dialog-tab"
+				style="background: none repeat scroll 0 0 #F9F9F9; height: 300px">
+				<div id="chart-form-container">Chart form here</div>
+			</div>
+			<div id="configure-mdx-tab" class="configure-dialog-tab"
+				style="background: none repeat scroll 0 0 #F9F9F9; height: 300px">
+				<div id="mdx-edit-form-container">MDX Edit form here</div>
+			</div>
+			<div id="configure-pdf-tab" class="configure-dialog-tab"
+				style="background: none repeat scroll 0 0 #F9F9F9; height: 300px">
+				<div id="print-form-container">PDF configuration form here</div>
+			</div>
+			<div id="configure-sort-tab" class="configure-dialog-tab"
+				style="background: none repeat scroll 0 0 #F9F9F9; height: 300px">
+				<div id="sort-form-container">Sort configuration form here</div>
+			</div>
+		</div>
+	</div>
+	<div id="slicer-value-dialog" title="Selected Slicer Value">
+		<div id="slicer-value-container"></div>
+	</div>
+	
+	<!-- 
+	<div id="member-navigator-popup">  -->
+		<!-- <div style="text-align: right; font-size: 16px; font-weight: bold"><span id="member-navigator-close-btn" style="cursor: pointer;">x</span></div> -->
+		<!-- <div id="member-navigator-container"></div>
+	</div> -->
+	
+	<div id="drillthrough-table-dialog">
+		<div id="drillthrough-table-container"></div>
+	</div>
+
+	<div id="drillthrough-option-dialog" title="Drillthrough Option">
+		<div id="drillthrough-option-cnt" >
+	
+				<table cellspacing="5" cellpadding="2" border="0">
+					<tr>
+						<td><label for="select-datasource-type">Web Service
+								URL</label></td>
+					</tr>
+					<tr>
+						<td><input type="text" id="drillthroughURL" /></td>
+					</tr>
+
+				</table>
+			
+			<div id="buttons-bar" style="margin-left:auto; margin-right:auto; width:150px;height: 30px;">
+				<button id="download-drillthrough-btn" class="openi-btn">Download</button>
+				<button id="send-drillthrough-btn" class="openi-btn" style="width:70px; float: right;">Send</button>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="error-message-dialog" title="Error">
+		<div id="error-message-container"></div>
+	</div>
+	<div id="success-message-dialog" title="Success">
+		<div id="success-message-container"></div>
+	</div>
+	<div id="member-navigator-dialog" title="Member Navigator">
+		<div id="member-navigator-container"></div>
+	</div>
+	<!-- </form> -->
+</body>
+</html>

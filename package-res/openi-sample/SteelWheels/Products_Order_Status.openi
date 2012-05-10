@@ -1,0 +1,49 @@
+<org.openi.analysis.Analysis>
+  <analysisTitle>Products Order Status</analysisTitle>
+  <mdxQuery>select NON EMPTY Crossjoin({[Order Status].[Cancelled], [Order Status].[Disputed], [Order Status].[In Process], [Order Status].[On Hold], [Order Status].[Resolved], [Order Status].[Shipped]}, {[Time].[All Years]}) ON COLUMNS,NON EMPTY Hierarchize(Crossjoin(Union({[Markets].[All Markets]}, [Markets].[All Markets].Children), Union({[Product].[All Products]}, [Product].[All Products].Children))) ON ROWS from [SteelWheelsSales]
+</mdxQuery>
+  <dataSourceName>XMLA_SteelWheels</dataSourceName>
+  <dsType>XMLA</dsType>
+  <foregroundAlpha>0.0</foregroundAlpha>
+  <showPareto>false</showPareto>
+  <showChart>true</showChart>
+  <showTable>true</showTable>
+  <chartTitle></chartTitle>
+  <chartType>3</chartType>
+  <chartHeight>384</chartHeight>
+  <chartWidth>1120</chartWidth>
+  <fontName>SansSerif</fontName>
+  <fontStyle>1</fontStyle>
+  <fontSize>18</fontSize>
+  <useChartSize>false</useChartSize>
+  <showLegend>true</showLegend>
+  <legendFontName>SansSerif</legendFontName>
+  <legendFontStyle>0</legendFontStyle>
+  <legendFontSize>10</legendFontSize>
+  <legendPosition>2</legendPosition>
+  <showSlicer>true</showSlicer>
+  <slicerPosition>1</slicerPosition>
+  <slicerAlignment>4</slicerAlignment>
+  <slicerFontName>SansSerif</slicerFontName>
+  <slicerFontStyle>0</slicerFontStyle>
+  <slicerFontSize>12</slicerFontSize>
+  <axisFontName>SansSerif</axisFontName>
+  <axisFontStyle>0</axisFontStyle>
+  <axisFontSize>12</axisFontSize>
+  <horizAxisLabel>Employees</horizAxisLabel>
+  <vertAxisLabel>Org Salary</vertAxisLabel>
+  <axisTickFontName>SansSerif</axisTickFontName>
+  <axisTickFontStyle>0</axisTickFontStyle>
+  <axisTickFontSize>10</axisTickFontSize>
+  <drillThroughEnabled>false</drillThroughEnabled>
+  <drillReplaceEnabled>false</drillReplaceEnabled>
+  <drillPositionEnabled>true</drillPositionEnabled>
+  <tickLabelRotate>30</tickLabelRotate>
+  <bgColorR>0</bgColorR>
+  <bgColorG>0</bgColorG>
+  <bgColorB>0</bgColorB>
+  <swapAxes>false</swapAxes>
+  <showNonEmpty>false</showNonEmpty>
+  <levelStyle>false</levelStyle>
+  <hideSpans>false</hideSpans>
+</org.openi.analysis.Analysis>

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<xform style="manual">
+	<div style="height: 300px">
+		<table border="0" cellspacing="5" cellpadding="2" id="chartForm"
+			width="100%">
+			<!-- 
+			<tr>
+				<th colspan="2" class="xform-title">
+					<table border="0" cellspacing="0" cellpadding="0" width="100%">
+						<tr>
+							<th align="left" class="xform-title">
+								Chart Properties
+     </th>
+							<td align="right" class="xform-close-button">
+								<imgButton src="wcf/form/cancel.png" action="revert"
+									label="Close" hide="true" handler="com.tonbeller.wcf.form.ButtonHandler" />
+							</td>
+						</tr>
+					</table>
+				</th>
+			</tr>
+			 -->
+			 <tr>
+				<td>Show Legend:</td>
+				<td>
+					<checkBox modelReference="showLegend" id="configure-chart-show-legend" name="configure-chart-show-legend" />
+					<listBox1 type="int" modelReference="legendPosition" id="configure-chart-select-legend-position" name="configure-chart-select-legend-position">
+						<listItem id="1" value="1" label="Top" />
+						<listItem id="3" value="3" label="Bottom" />
+						<listItem id="0" value="0" label="Left" />
+						<listItem id="2" value="2" label="Right" />
+					</listBox1>
+				</td>
+				<td>Legend Font:</td>
+				<td>
+					<listBox1 type="string" modelReference="legendFontName" id="configure-chart-select-legend-fontFamily" name="configure-chart-select-legend-fontFamily">
+						<listItem id="SansSerif" value="SansSerif" label="SansSerif" />
+						<listItem id="Serif" value="Serif" label="Serif" />
+						<listItem id="Monospaced" value="Monospaced" label="Monospaced" />
+						<listItem id="Verdana" value="Verdana" label="Verdana" />
+					</listBox1>
+					<listBox1 type="int" modelReference="legendFontStyle" id="configure-chart-select-legend-fontWeight" name="configure-chart-select-legend-fontWeight">
+						<listItem id="0" value="0" label="Plain" />
+						<listItem id="1" value="1" label="Bold" />
+						<listItem id="2" value="2" label="Italic" />
+						<listItem id="3" value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="legendFontSize" id="configure-chart-select-legend-fontSize" name="configure-chart-select-legend-fontSize">
+						<listItem id="8"  value="8" label="8" />
+						<listItem id="10"  value="10" label="10" />
+						<listItem id="11"  value="11" label="11" />
+						<listItem id="12"  value="12" label="12" />
+						<listItem id="14"  value="14" label="14" />
+						<listItem id="16"  value="16" label="16" />
+						<listItem id="18"  value="18" label="18" />
+						<listItem id="20"  value="20" label="20" />
+						<listItem id="22"  value="22" label="22" />
+						<listItem id="24"  value="24" label="24" />
+						<listItem id="26"  value="26" label="26" />
+						<listItem id="28"  value="28" label="28" />
+						<listItem id="30"  value="30" label="30" />
+						<listItem id="32"  value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Show Slicer:</td>
+				<td>
+					<checkBox modelReference="showSlicer" id="configure-chart-show-slicer" name="configure-chart-show-slicer" />
+					<listBox1 type="int" modelReference="slicerPosition" id="configure-chart-select-slicer-position" name="configure-chart-select-slicer-position"
+						label="Slicer Position">
+						<listItem id="1" value="1" label="Top" />
+						<listItem id="3" value="3" label="Bottom" />
+						<listItem id="0" value="0" label="Left" />
+						<listItem id="2" value="2" label="Right" />
+					</listBox1>
+					<!-- 
+					<listBox1 type="int" modelReference="slicerAlignment" id="configure-chart-select-slicer-alignment" name="configure-chart-select-slicer-alignment"
+						label="Slicer Alignment">
+						<listItem value="3" label="Left" />
+						<listItem value="2" label="Right" />
+						<listItem value="4" label="Center" />
+					</listBox1>
+					 -->
+				</td>
+				<td>Slicer Font:</td>
+				<td>
+					<listBox1 type="string" modelReference="slicerFontName" id="configure-chart-select-slicer-fontFamily" name="configure-chart-select-slicer-fontFamily">
+						<listItem id="SansSerif" value="SansSerif" label="SansSerif" />
+						<listItem id="Serif" value="Serif" label="Serif" />
+						<listItem id="Monospaced" value="Monospaced" label="Monospaced" />
+						<listItem id="Verdana" value="Verdana" label="Verdana" />
+					</listBox1>
+					<listBox1 type="int" modelReference="slicerFontStyle" id="configure-chart-select-slicer-fontWeight" name="configure-chart-select-slicer-fontWeight">
+						<listItem id="0" value="0" label="Plain" />
+						<listItem id="1" value="1" label="Bold" />
+						<listItem id="2" value="2" label="Italic" />
+						<listItem id="3" value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="slicerFontSize" id="configure-chart-select-slicer-fontSize" name="configure-chart-select-slicer-fontSize">
+						<listItem id="8"  value="8" label="8" />
+						<listItem id="10"  value="10" label="10" />
+						<listItem id="11"  value="11" label="11" />
+						<listItem id="12"  value="12" label="12" />
+						<listItem id="14"  value="14" label="14" />
+						<listItem id="16"  value="16" label="16" />
+						<listItem id="18"  value="18" label="18" />
+						<listItem id="20"  value="20" label="20" />
+						<listItem id="22"  value="22" label="22" />
+						<listItem id="24"  value="24" label="24" />
+						<listItem id="26"  value="26" label="26" />
+						<listItem id="28"  value="28" label="28" />
+						<listItem id="30"  value="30" label="30" />
+						<listItem id="32"  value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Subtitle:</td>
+				<td>
+					<textField type="string" modelReference="chartTitle"
+						size="30" title="enter a title for this chart" id="configure-chart-subtitle-input" name="configure-chart-subtitle-input" />
+				</td>
+				<td>Chart Title:</td>
+				<td>
+					<listBox1 type="string" modelReference="fontName" label="Title font" id="configure-chart-select-chartTitle-fontFamily" name="configure-chart-select-chartTitle-fontFamily">
+						<listItem id="SansSerif" value="SansSerif" label="SansSerif" />
+						<listItem id="Serif" value="Serif" label="Serif" />
+						<listItem id="Monospaced" value="Monospaced" label="Monospaced" />
+						<listItem id="Verdana" value="Verdana" label="Verdana" />
+					</listBox1>
+					<listBox1 type="int" modelReference="fontStyle" label="Title font style" id="configure-chart-select-chartTitle-fontWeight" name="configure-chart-select-chartTitle-fontWeight">
+						<listItem id="0" value="0" label="Plain" />
+						<listItem id="1" value="1" label="Bold" />
+						<listItem id="2" value="2" label="Italic" />
+						<listItem id="3" value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="fontSize" label="Title font size" id="configure-chart-select-chartTitle-fontSize" name="configure-chart-select-chartTitle-fontSize">
+						<listItem id="8"  value="8" label="8" />
+						<listItem id="10"  value="10" label="10" />
+						<listItem id="11"  value="11" label="11" />
+						<listItem id="12"  value="12" label="12" />
+						<listItem id="14"  value="14" label="14" />
+						<listItem id="16"  value="16" label="16" />
+						<listItem id="18"  value="18" label="18" />
+						<listItem id="20"  value="20" label="20" />
+						<listItem id="22"  value="22" label="22" />
+						<listItem id="24"  value="24" label="24" />
+						<listItem id="26"  value="26" label="26" />
+						<listItem id="28"  value="28" label="28" />
+						<listItem id="30"  value="30" label="30" />
+						<listItem id="32"  value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Horizontal Axis Label:</td>
+				<td>
+					<textField type="string" modelReference="horizAxisLabel"
+						size="30" title="enter a label for this axis" id="configure-chart-horiz-axislabel-input" name="configure-chart-horiz-axislabel-input"/>
+				</td>
+				<td>Axis Label Font:</td>
+				<td>
+					<listBox1 type="string" modelReference="axisFontName" id="configure-chart-select-axisLabel-fontFamily" name="configure-chart-select-axisLabel-fontFamily">
+						<listItem id="SansSerif" value="SansSerif" label="SansSerif" />
+						<listItem id="Serif" value="Serif" label="Serif" />
+						<listItem id="Monospaced" value="Monospaced" label="Monospaced" />
+						<listItem id="Verdana" value="Verdana" label="Verdana" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisFontStyle" id="configure-chart-select-axisLabel-fontWeight" name="configure-chart-select-axisLabel-fontWeight">
+						<listItem id="0" value="0" label="Plain" />
+						<listItem id="1" value="1" label="Bold" />
+						<listItem id="2" value="2" label="Italic" />
+						<listItem id="3" value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisFontSize" id="configure-chart-select-axisLabel-fontSize" name="configure-chart-select-axisLabel-fontSize">
+						<listItem id="8"  value="8" label="8" />
+						<listItem id="10"  value="10" label="10" />
+						<listItem id="11"  value="11" label="11" />
+						<listItem id="12"  value="12" label="12" />
+						<listItem id="14"  value="14" label="14" />
+						<listItem id="16"  value="16" label="16" />
+						<listItem id="18"  value="18" label="18" />
+						<listItem id="20"  value="20" label="20" />
+						<listItem id="22"  value="22" label="22" />
+						<listItem id="24"  value="24" label="24" />
+						<listItem id="26"  value="26" label="26" />
+						<listItem id="28"  value="28" label="28" />
+						<listItem id="30"  value="30" label="30" />
+						<listItem id="32"  value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical Axis Label:</td>
+				<td>
+					<textField type="string" modelReference="vertAxisLabel"
+						size="30" title="enter a label for this axis" id="configure-chart-vert-axislabel-input" name="configure-chart-vert-axislabel-input"/>
+				</td>
+				<td>Axis Tick Label Font:</td>
+				<td>
+					<listBox1 type="string" modelReference="axisTickFontName" id="configure-chart-select-axisTickLabel-fontFamily" name="configure-chart-select-axisTickLabel-fontFamily">
+						<listItem id="SansSerif" value="SansSerif" label="SansSerif" />
+						<listItem id="Serif" value="Serif" label="Serif" />
+						<listItem id="Monospaced" value="Monospaced" label="Monospaced" />
+						<listItem id="Verdana" value="Verdana" label="Verdana" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisTickFontStyle" id="configure-chart-select-axisTickLabel-fontWeight" name="configure-chart-select-axisTickLabel-fontWeight">
+						<listItem id="0" value="0" label="Plain" />
+						<listItem id="1" value="1" label="Bold" />
+						<listItem id="2" value="2" label="Italic" />
+						<listItem id="3" value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisTickFontSize" id="configure-chart-select-axisTickLabel-fontSize" name="configure-chart-select-axisTickLabel-fontSize">
+						<listItem id="8"  value="8" label="8" />
+						<listItem id="10"  value="10" label="10" />
+						<listItem id="11"  value="11" label="11" />
+						<listItem id="12"  value="12" label="12" />
+						<listItem id="14"  value="14" label="14" />
+						<listItem id="16"  value="16" label="16" />
+						<listItem id="18"  value="18" label="18" />
+						<listItem id="20"  value="20" label="20" />
+						<listItem id="22"  value="22" label="22" />
+						<listItem id="24"  value="24" label="24" />
+						<listItem id="26"  value="26" label="26" />
+						<listItem id="28"  value="28" label="28" />
+						<listItem id="30"  value="30" label="30" />
+						<listItem id="32"  value="32" label="32" />
+					</listBox1>
+					<!-- 
+					<listBox1 type="int" modelReference="tickLabelRotate">
+						<listItem value="0" label="0°" />
+						<listItem value="30" label="30°" />
+						<listItem value="45" label="45°" />
+						<listItem value="90" label="90°" />
+					</listBox1> -->
+				</td>
+			</tr>
+			
+			<!-- 
+			<tr>
+				<td>Chart Type</td>
+				<td>
+					<listBox1 type="int" modelReference="chartType">
+						<listItem value="1" label="Vertical Bar" />
+						<listItem value="2" label="Vertical Bar 3D" />
+						<listItem value="3" label="Hozontal Bar" />
+						<listItem value="4" label="Horizontal Bar 3D" />
+						<listItem value="5" label="Stacked Vertical Bar" />
+						<listItem value="6" label="Stacked Vertical Bar 3D" />
+						<listItem value="7" label="Stacked Horizontal Bar" />
+						<listItem value="8" label="Stacked Horizontal Bar 3D" />
+						<listItem value="9" label="Vertical Line" />
+						<listItem value="10" label="Horizontal Line" />
+						<listItem value="11" label="Vertical Area" />
+						<listItem value="12" label="Horizontal Area" />
+						<listItem value="13" label="Vertical Stacked Area" />
+						<listItem value="14" label="Horizontal Stacked Area" />
+						<listItem value="15" label="Pie Charts by Column" />
+						<listItem value="16" label="Pie Charts by Row" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Enable Drill Through</td>
+				<td>
+					<checkBox modelReference="drillThroughEnabled" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Chart Title</td>
+				<td>
+					<textField type="string" modelReference="chartTitle"
+						size="30" title="enter a title for this chart" />
+				</td>
+			</tr>
+			<tr>
+				<td>Chart Title Font</td>
+				<td>
+					<listBox1 type="string" modelReference="fontName" label="Title font">
+						<listItem value="SansSerif" label="SansSerif" />
+						<listItem value="Serif" label="Serif" />
+						<listItem value="Monospaced" label="Monospaced" />
+					</listBox1>
+					<listBox1 type="int" modelReference="fontStyle" label="Title font style">
+						<listItem value="0" label="Plain" />
+						<listItem value="1" label="Bold" />
+						<listItem value="2" label="Italic" />
+						<listItem value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="fontSize" label="Title font size">
+						<listItem value="8" label="8" />
+						<listItem value="10" label="10" />
+						<listItem value="12" label="12" />
+						<listItem value="14" label="14" />
+						<listItem value="16" label="16" />
+						<listItem value="18" label="18" />
+						<listItem value="20" label="20" />
+						<listItem value="22" label="22" />
+						<listItem value="24" label="24" />
+						<listItem value="26" label="26" />
+						<listItem value="28" label="28" />
+						<listItem value="30" label="30" />
+						<listItem value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Horizontal axis label</td>
+				<td>
+					<textField type="string" modelReference="horizAxisLabel"
+						size="30" title="enter a label for this axis" />
+				</td>
+			</tr>
+			<tr>
+				<td>Vertical axis label</td>
+				<td>
+					<textField type="string" modelReference="vertAxisLabel"
+						size="30" title="enter a label for this axis" />
+				</td>
+			</tr>
+			<tr>
+				<td>Axes Label Font</td>
+				<td>
+					<listBox1 type="string" modelReference="axisFontName">
+						<listItem value="SansSerif" label="SansSerif" />
+						<listItem value="Serif" label="Serif" />
+						<listItem value="Monospaced" label="Monospaced" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisFontStyle">
+						<listItem value="0" label="Plain" />
+						<listItem value="1" label="Bold" />
+						<listItem value="2" label="Italic" />
+						<listItem value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisFontSize">
+						<listItem value="8" label="8" />
+						<listItem value="10" label="10" />
+						<listItem value="12" label="12" />
+						<listItem value="14" label="14" />
+						<listItem value="16" label="16" />
+						<listItem value="18" label="18" />
+						<listItem value="20" label="20" />
+						<listItem value="22" label="22" />
+						<listItem value="24" label="24" />
+						<listItem value="26" label="26" />
+						<listItem value="28" label="28" />
+						<listItem value="30" label="30" />
+						<listItem value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Axes Tick Label font</td>
+				<td>
+					<listBox1 type="string" modelReference="axisTickFontName">
+						<listItem value="SansSerif" label="SansSerif" />
+						<listItem value="Serif" label="Serif" />
+						<listItem value="Monospaced" label="Monospaced" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisTickFontStyle">
+						<listItem value="0" label="Plain" />
+						<listItem value="1" label="Bold" />
+						<listItem value="2" label="Italic" />
+						<listItem value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="axisTickFontSize">
+						<listItem value="8" label="8" />
+						<listItem value="10" label="10" />
+						<listItem value="12" label="12" />
+						<listItem value="14" label="14" />
+						<listItem value="16" label="16" />
+						<listItem value="18" label="18" />
+						<listItem value="20" label="20" />
+						<listItem value="22" label="22" />
+						<listItem value="24" label="24" />
+						<listItem value="26" label="26" />
+						<listItem value="28" label="28" />
+						<listItem value="30" label="30" />
+						<listItem value="32" label="32" />
+					</listBox1>
+					<listBox1 type="int" modelReference="tickLabelRotate">
+						<listItem value="0" label="0°" />
+						<listItem value="30" label="30°" />
+						<listItem value="45" label="45°" />
+						<listItem value="90" label="90°" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Show Legend</td>
+				<td>
+					<checkBox modelReference="showLegend" />
+					<listBox1 type="int" modelReference="legendPosition">
+						<listItem value="1" label="Top" />
+						<listItem value="3" label="Bottom" />
+						<listItem value="0" label="Left" />
+						<listItem value="2" label="Right" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Legend Font</td>
+				<td>
+					<listBox1 type="string" modelReference="legendFontName">
+						<listItem value="SansSerif" label="SansSerif" />
+						<listItem value="Serif" label="Serif" />
+						<listItem value="Monospaced" label="Monospaced" />
+					</listBox1>
+					<listBox1 type="int" modelReference="legendFontStyle">
+						<listItem value="0" label="Plain" />
+						<listItem value="1" label="Bold" />
+						<listItem value="2" label="Italic" />
+						<listItem value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="legendFontSize">
+						<listItem value="8" label="8" />
+						<listItem value="10" label="10" />
+						<listItem value="12" label="12" />
+						<listItem value="14" label="14" />
+						<listItem value="16" label="16" />
+						<listItem value="18" label="18" />
+						<listItem value="20" label="20" />
+						<listItem value="22" label="22" />
+						<listItem value="24" label="24" />
+						<listItem value="26" label="26" />
+						<listItem value="28" label="28" />
+						<listItem value="30" label="30" />
+						<listItem value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Show Slicer</td>
+				<td>
+					<checkBox modelReference="showSlicer" />
+					<listBox1 type="int" modelReference="slicerPosition"
+						label="Slicer Position">
+						<listItem value="0" label="Top" />
+						<listItem value="1" label="Bottom" />
+						<listItem value="3" label="Left" />
+						<listItem value="2" label="Right" />
+					</listBox1>
+					<listBox1 type="int" modelReference="slicerAlignment"
+						label="Slicer Alignment">
+						<listItem value="3" label="Left" />
+						<listItem value="2" label="Right" />
+						<listItem value="4" label="Center" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Slicer Font</td>
+				<td>
+					<listBox1 type="string" modelReference="slicerFontName">
+						<listItem value="SansSerif" label="SansSerif" />
+						<listItem value="Serif" label="Serif" />
+						<listItem value="Monospaced" label="Monospaced" />
+					</listBox1>
+					<listBox1 type="int" modelReference="slicerFontStyle">
+						<listItem value="0" label="Plain" />
+						<listItem value="1" label="Bold" />
+						<listItem value="2" label="Italic" />
+						<listItem value="3" label="Bold Italic" />
+					</listBox1>
+					<listBox1 type="int" modelReference="slicerFontSize">
+						<listItem value="8" label="8" />
+						<listItem value="10" label="10" />
+						<listItem value="12" label="12" />
+						<listItem value="14" label="14" />
+						<listItem value="16" label="16" />
+						<listItem value="18" label="18" />
+						<listItem value="20" label="20" />
+						<listItem value="22" label="22" />
+						<listItem value="24" label="24" />
+						<listItem value="26" label="26" />
+						<listItem value="28" label="28" />
+						<listItem value="30" label="30" />
+						<listItem value="32" label="32" />
+					</listBox1>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Chart Height</td>
+				<td>
+					<textField type="posint" modelReference="chartHeight"
+						size="5" title="enter height in pixels - default 300" />
+					&#160;&#160;&#160;Chart Width
+					<textField type="posint" modelReference="chartWidth"
+						size="5" title="enter width in pixels - default 500" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Background (R, G, B)</td>
+				<td>
+					<textField type="posint" modelReference="bgColorR" size="4"
+						title="enter Red value 0-255" />
+					<textField type="posint" modelReference="bgColorG" size="4"
+						title="enter Green value 0-255" />
+					<textField type="posint" modelReference="bgColorB" size="4"
+						title="enter Blue value 0-255" />
+				</td>
+			</tr>
+
+			<tr>
+				<td align="right" colspan="4">
+					<button action="validate" label="OK"
+						handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" />
+					<button action="revert" label="Cancel"
+						handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" />
+				</td>
+			</tr>
+			 -->
+		</table>
+	</div>
+	<input type="submit" value="Apply" onclick="OpenIAnalysis.applyChartProperties(this, pivotID); return false;" class="openi-btn" style="float:right" />
+</xform>

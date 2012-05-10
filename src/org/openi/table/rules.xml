@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<digester-rules>
+  <pattern value="table">
+    <object-create-rule attrname="class"/>
+    <set-properties-rule/>
+    <set-next-rule methodname="setObject"/>
+
+
+	  <pattern value="cellBuilder">
+	    <object-create-rule attrname="class"/>
+	    <set-properties-rule/>
+	    <set-next-rule methodname="setCellBuilder"/>
+	  </pattern>
+	
+	  <pattern value="slicerBuilder">
+	    <object-create-rule attrname="class"/>
+	    <set-properties-rule/>
+	    <set-next-rule methodname="setSlicerBuilder"/>
+	  </pattern>
+	
+	  <pattern value="cornerBuilder">
+	    <object-create-rule attrname="class"/>
+	    <set-properties-rule/>
+	    <set-next-rule methodname="setCornerBuilder"/>
+	  </pattern>
+	
+	  <pattern value="rowAxisBuilder">
+	    <object-create-rule attrname="class"/>
+	    <set-properties-rule/>
+	    <set-next-rule methodname="setRowAxisBuilder"/>
+	  </pattern>
+	
+	  <pattern value="columnAxisBuilder">
+	    <object-create-rule attrname="class"/>
+	    <set-properties-rule/>
+	    <set-next-rule methodname="setColumnAxisBuilder"/>
+	  </pattern>
+
+
+    <pattern value="extension">
+      <object-create-rule attrname="class"/>
+      <set-properties-rule/>
+      <set-next-rule methodname="addExtension"/>
+    </pattern>
+
+  </pattern>
+</digester-rules>

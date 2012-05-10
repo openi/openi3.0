@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xform style="manual" bundle="com.tonbeller.jpivot.table.resources">
+	<div style="height: 300px">
+		<table border="0" cellspacing="5" cellpadding="2" id="sortForm" width="100%">
+			<!-- 
+				<title value="fmt:sortform.title">
+					<imgButton src="wcf/form/cancel.png" action="revert"
+						label="fmt:sortform.close" hide="true"
+						handler="com.tonbeller.wcf.form.ButtonHandler" />
+				</title>
+			 -->
+			<tr>
+				<td>Sort Mode</td>
+				<td>
+					<listBox1 type="int" bookmark="false" modelReference="extensions(sortRank).sortMode"
+						id="sortForm-sort-mode-select-menu" name="sortForm-sort-mode-select-menu">
+						<listItem id="1" value="1" label="Keep Hierarchy Ascending" />
+						<listItem id="2" value="2" label="Keep Hierarchy Descending" />
+						<listItem id="3" value="3" label="Break Hierarchy Ascending" />
+						<listItem id="4" value="4" label="Break Hierarchy Descending" />
+						<listItem id="5" value="5" label="Top Count" />
+						<listItem id="6" value="6" label="Bottom Count" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Number of Rows for Ranking</td>
+				<td>
+					<textField type="int" bookmark="false"
+						modelReference="extensions(sortRank).topBottomCount"
+						title="Enter number" id="sortForm-rows-count-input" name="sortForm-rows-count-input"/>
+				</td>
+			</tr>
+			<tr>
+				<td>Show Member Properties</td>
+				<td>
+					<checkBox modelReference="rowAxisBuilder.axisConfig.propertyConfig.showProperties"
+						label="Show Member Properties" id="sortForm-show-props-chk-box" name="sortForm-show-props-chk-box"/>
+				</td>
+			</tr>
+			<!-- 
+			<tr>
+				<td colspan="2">
+					<buttons>
+						<input type="submit" value="Apply" onclick="OlapActions.applySortProperties(this, pivotID); return false;" class="openi-btn" style="float:right" />
+						
+						
+						<button action="validate" label="Apply"
+							handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" onclick="OlapActions.applySortProperties(this, pivotID); return false;" class="openi-btn" style="float:right" />
+						
+							<button action="revert" label="fmt:sortform.cancel"
+								handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" />
+						
+					</buttons>
+				</td>
+			</tr>-->
+		</table>
+	</div>
+	<input type="submit" value="Apply" onclick="OlapActions.applySortProperties(this, pivotID); return false;" class="openi-btn" style="float:right" />
+</xform>

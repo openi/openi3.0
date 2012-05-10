@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<xform style="manual">
+	<div style="height: 300px">
+		<table border="0" cellspacing="5" cellpadding="2" id="printForm" width="100%">
+			<!-- 
+				<tr>
+					<th colspan="2" class="xform-title">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+								<th align="left" class="xform-title">
+									Print Properties
+								</th>
+								<td align="right" class="xform-close-button">
+									<imgButton src="wcf/form/cancel.png" action="revert"
+										label="Close" hide="true" handler="com.tonbeller.wcf.form.ButtonHandler" />
+								</td>
+							</tr>
+						</table>
+					</th>
+				</tr>
+			 -->
+			<tr>
+				<td>Report Title</td>
+				<td>
+					<textField type="string" modelReference="reportTitle"
+						size="30" title="enter a title for this report" id="printForm-report-title-input" name="printForm-report-title-input" />
+				</td>
+			</tr>
+			<tr>
+				<td>Page Orientation</td>
+				<td>
+					<listBox1 type="string" modelReference="pageOrientation" id="printForm-page-orientation-select-menu" name="printForm-page-orientation-select-menu">
+						<listItem value="portrait" label="Portrait" />
+						<listItem value="landscape" label="Landscape" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Paper Size</td>
+				<td>
+					<listBox1 type="string" modelReference="paperType" id="printForm-page-size-select-menu" name="printForm-page-size-select-menu">
+						<listItem value="USletter" label="USletter" />
+						<listItem value="A3" label="A3" />
+						<listItem value="A4" label="A4" />
+						<listItem value="A5" label="A5" />
+						<listItem value="custom" label="custom" />
+						<listItem value="auto" label="auto" />
+					</listBox1>
+				</td>
+			</tr>
+			<tr>
+				<td>Custom Height/Width</td>
+				<td>
+					<textField type="double" modelReference="pageHeight" size="4"
+						title="enter Page Height (cm)" id="printForm-page-height-input" name="printForm-page-height-input" />
+					cm
+					<textField type="double" modelReference="pageWidth" size="4"
+						title="enter Page Width (cm)" id="printForm-page-width-input" name="printForm-page-width-input" />
+					cm (0=default A4)
+				</td>
+			</tr>
+	
+			<tr>
+				<td>Table Width</td>
+				<td>
+					<checkBox modelReference="setTableWidth" id="printForm-table-width-chk-box" name="printForm-table-width-chk-box" />
+					(off = auto)
+					<textField type="double" modelReference="tableWidth" size="4"
+						title="enter Table Width (cm)" id="printForm-table-width-input" name="printForm-table-width-input" />
+					cm
+				</td>
+			</tr>
+			<tr>
+				<td>Chart on separate page</td>
+				<td>
+					<checkBox modelReference="chartPageBreak" id="" name="printForm-chart-page-break-chk-box" />
+				</td>
+			</tr>
+			<!--
+			<tr>
+				<td align="right" colspan="4">
+					<button action="validate" label="Apply"
+						handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" onclick="OpenIAnalysis.applyPrintSettings(this, pivotID);" class="openi-btn" style="float:right" />
+					
+					<button action="revert" label="Cancel"
+						handler="com.tonbeller.wcf.form.ButtonHandler" hide="true" />
+					
+				</td>
+			</tr>
+			 -->
+		</table>
+	</div>
+	<input type="submit" value="Apply" onclick="OpenIAnalysis.applyPrintSettings(this, pivotID);" class="openi-btn" style="float:right" />
+</xform>

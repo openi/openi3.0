@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+                           http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
+
+	<context:annotation-config />
+
+	<!-- <bean id="jaxrsPluginServlet" class="org.openi.pentaho.plugin.JAXRSPluginServlet" 
+		/> -->
+
+	<context:annotation-config />
+
+	<bean id="enunciatePluginServlet" class="org.openi.pentaho.plugin.EnunciateJerseyPluginServlet">
+		<property name="initParams">
+			<map>
+				<entry key="com.sun.jersey.config.property.resourceConfigClass"
+					value="com.sun.jersey.api.core.PackagesResourceConfig" />
+				<entry key="com.sun.jersey.config.property.packages" value="org.openi.web.rest" />
+				<entry
+					key="org.codehaus.enunciate.modules.jersey.config.ResourceProviderFactory"
+					value="com.sun.jersey.spi.spring.container.SpringComponentProviderFactory" />
+
+			</map>
+		</property>
+	</bean>
+
+	<bean id="wcfComponentServlet" class="org.openi.web.servlet.WCFComponentServlet" />
+	
+	<bean id="chartServlet" class="org.openi.web.servlet.ChartServlet" />
+
+	<bean id="componentService" class="org.openi.service.WCFComponentService" />
+	
+	<bean id="olapQueryService" class="org.openi.service.OlapQueryService" />
+	
+	<bean id="analysisService" class="org.openi.service.AnalysisService" />
+	
+	<bean id="dsManager" class="org.openi.pentaho.plugin.DataSourceManager" />
+	
+	<bean id="accessController" class="org.openi.acl.AccessController" />
+	
+	<bean id="dsService" class="org.openi.service.DatasourceService">
+		<property name="dsManager" ref="dsManager" />
+		<property name="accessController" ref="accessController" />
+	</bean>
+	
+	<bean id="olapDiscoverService" class="org.openi.service.OlapDiscoverService">
+		<property name="dsService" ref="dsService" />
+	</bean>
+	
+	<bean id="exploreDataService" class="org.openi.service.ExploreDataService">
+		<property name="dsService" ref="dsService" />
+	</bean>
+
+	<bean class="org.openi.web.rest.WCFComponentResource">
+		<property name="componentService" ref="componentService" />
+	</bean>
+
+	<bean class="org.openi.web.rest.QueryResource">
+		<property name="olapQueryService" ref="olapQueryService" />
+	</bean>
+	
+	<bean class="org.openi.web.rest.DatasourceResource">
+		<property name="dsService" ref="dsService" />
+	</bean>
+	
+	<bean class="org.openi.web.rest.AnalysisResource">
+		<property name="analysisService" ref="analysisService" />
+	</bean>
+	
+	<bean class="org.openi.web.rest.OlapDiscoverResource">
+		<property name="olapDiscoverService" ref="olapDiscoverService" />
+	</bean>
+	
+	<bean class="org.openi.web.rest.ExploreDataResource">
+		<property name="exploreDataService" ref="exploreDataService" />
+	</bean>
+	
+</beans>
