@@ -1238,15 +1238,15 @@ public class XMLA_SOAP implements OlapDiscoverer {
 		}
 
 		String upperDSString = dataSourceString.toUpperCase();
-		if (!upperDSString.startsWith("PROVIDER=")) {
+		/*if (!upperDSString.startsWith("PROVIDER=")) {
 			throw new OlapException(
 					"Malformed data source given for determining XML/A provider");
-		}
+		}*/
 
 		if (upperDSString.startsWith("PROVIDER=SAP")) {
 			logger.debug("Provider is SAP");
 			return OlapDiscoverer.PROVIDER_SAP;
-		} else if (upperDSString.startsWith("PROVIDER=MONDRIAN")) {
+		} else if (upperDSString.startsWith("PROVIDER=MONDRIAN") || upperDSString.startsWith("PROVIDER=PENTAHOXMLA")) {
 			logger.debug("Provider is Mondrian");
 			return OlapDiscoverer.PROVIDER_MONDRIAN;
 		} else if (upperDSString.startsWith("PROVIDER=MS")) {// not sure if this
@@ -1491,18 +1491,24 @@ public class XMLA_SOAP implements OlapDiscoverer {
 
 			msg.saveChanges();
 
-			if (logger.isDebugEnabled()) {
+			/*if (logger.isDebugEnabled()) {
 				logger.debug("Discover Request for " + request);
 				logSoapMsg(msg);
-			}
+			}*/
+			
+			logger.info("Discover Request");
+			logSoapMsg(msg);
 
 			// run the call
 			SOAPMessage reply = connection.call(msg, url);
 
-			if (logger.isDebugEnabled()) {
+			/*if (logger.isDebugEnabled()) {
 				logger.debug("Discover Response for " + request);
 				logSoapMsg(reply);
-			}
+			}*/
+			
+			logger.info("Discover Response");
+			logSoapMsg(reply);
 
 			errorCheck(reply);
 
@@ -1661,7 +1667,7 @@ public class XMLA_SOAP implements OlapDiscoverer {
 			Source src = msg.getSOAPPart().getContent();
 			StreamResult result = new StreamResult(writer);
 			transformer.transform(src, result);
-			logger.debug(writer.toString());
+			logger.info(writer.toString());
 		} catch (Exception e) {
 			// no big problen - just for debugging
 			logger.error("?", e);

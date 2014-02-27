@@ -20,11 +20,8 @@ import org.openi.util.plugin.PluginUtils;
 import org.openi.wcf.form.FormComponentTag;
 import org.pentaho.platform.api.engine.IPentahoSession;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
-import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.platform.plugin.action.mondrian.catalog.MondrianCatalog;
-import org.pentaho.platform.web.http.PentahoHttpSessionHelper;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import org.openi.navigator.Navigator;
 import org.openi.navigator.NavigatorTag;
 
@@ -54,8 +51,9 @@ public class WCFHelper {
 	private String pivotID = null;
 
 	public WCFHelper(RequestContext context, String pivotID) {
-		this.session = PentahoHttpSessionHelper.getPentahoSession(context
-				.getRequest());
+		// this.session = PentahoHttpSessionHelper.getPentahoSession(context
+		// .getRequest());
+		this.session = PentahoSessionHolder.getSession();
 		this.context = context;
 		this.pivotID = pivotID;
 	}
@@ -113,17 +111,25 @@ public class WCFHelper {
 					.getDatasource(analysis.getDataSourceName(),
 							DatasourceType.MONDRIAN);
 			MondrianCatalog selectedCatalog = mondrianDS.getMondrianCatalog();
-			
-			String jndiDS = selectedCatalog.getEffectiveDataSource().getJndi();
+			String jndiDS = selectedCatalog.getJndi();
 
-			String catalogUri = "file://"
-					+ PentahoSystem.getApplicationContext().getSolutionPath(
-							selectedCatalog.getDefinition().substring(
-									("solution:/").length() - 1));
-			/*String catalogUri = selectedCatalog.getDefinition().replaceAll("solution:", "file:" + PentahoSystem.getApplicationContext().getSolutionPath("") );*/
-			
+			/*
+			 * String catalogUri = "file://" +
+			 * PentahoSystem.getApplicationContext().getSolutionPath(
+			 * selectedCatalog.getDefinition().substring(
+			 * ("solution:/").length() - 1));
+			 */
+			/*
+			 * String catalogUri =
+			 * selectedCatalog.getDefinition().replaceAll("solution:", "file:" +
+			 * PentahoSystem.getApplicationContext().getSolutionPath("") );
+			 */
+			// String catalogUri = "file://etc/mondrian/" +
+			// selectedCatalog.getName() + "/schema.xml";
+
+			String catalogUri = selectedCatalog.getDefinition();
+
 			String role = MondrianHelper.doMondrianRoleMapping(catalogUri);
-			
 
 			if (logger.isInfoEnabled()) {
 				logger.info("CatalogURI : " + catalogUri);
@@ -136,8 +142,8 @@ public class WCFHelper {
 			String dsInfo = selectedCatalog.getDataSourceInfo();
 			String[] dsInfoSplits = dsInfo.split(";");
 			String dynResolver = "";
-			for(int i = 0; i < dsInfoSplits.length; i++) {
-				if(dsInfoSplits[i].startsWith("DynamicSchemaProcessor")) {
+			for (int i = 0; i < dsInfoSplits.length; i++) {
+				if (dsInfoSplits[i].startsWith("DynamicSchemaProcessor")) {
 					String dsInfoSplit = dsInfoSplits[i];
 					dynResolver = dsInfoSplit.split("=")[1];
 					break;
@@ -181,12 +187,12 @@ public class WCFHelper {
 						+ "'", e);
 			}
 		}
-		
-		if(chart != null) {
+
+		if (chart != null) {
 			chart.setChartType(analysis.getChartType());
 			chart.setChartHeight(analysis.getChartHeight());
 			chart.setChartWidth(analysis.getChartWidth());
-			
+
 			chart.setLegendPosition(analysis.getLegendPosition());
 			chart.setShowLegend(analysis.isShowLegend());
 			chart.setLegendFontName(analysis.getLegendFontName());
@@ -206,11 +212,11 @@ public class WCFHelper {
 
 			chart.setHorizAxisLabel(analysis.getHorizAxisLabel());
 			chart.setVertAxisLabel(analysis.getVertAxisLabel());
-			
+
 			chart.setAxisFontName(analysis.getAxisFontName());
 			chart.setAxisFontStyle(analysis.getAxisFontStyle());
 			chart.setAxisFontSize(analysis.getAxisFontSize());
-			
+
 			chart.setAxisTickFontName(analysis.getAxisTickFontName());
 			chart.setAxisTickFontStyle(analysis.getAxisTickFontStyle());
 			chart.setAxisTickFontSize(analysis.getAxisTickFontSize());
@@ -265,7 +271,7 @@ public class WCFHelper {
 				+ ".drillthroughtable");
 		if (comp == null) {
 			RequestContext context = getRequestContext();
-			com.tonbeller.wcf.table.TableComponentTag tag = new com.tonbeller.wcf.table.TableComponentTag();
+			org.openi.wcf.table.TableComponentTag tag = new org.openi.wcf.table.TableComponentTag();
 			tag.setId("xmlaQuery" + pivotID + ".drillthroughtable");
 			tag.setVisible(false);
 			tag.setSelmode("none");
@@ -345,6 +351,7 @@ public class WCFHelper {
 			formTag.setModel(model);
 			formTag.setId(id);
 			formTag.setVisible(visible);
+			
 			try {
 				component = formTag.createComponent(getRequestContext());
 				component.initialize(getRequestContext());

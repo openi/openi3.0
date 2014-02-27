@@ -38,10 +38,21 @@ public class XMLAUtils {
 	@SuppressWarnings("unchecked")
 	public static List getCubesList(XMLADatasource datasource)
 			throws OlapException, UnsupportedEncodingException {
+		/*
+		 * XMLA_SOAP xmlaSOAP = new XMLA_SOAP(datasource.getServerURL(),
+		 * URLEncoder.encode(datasource.getUsername(), "UTF-8"),
+		 * URLEncoder.encode(datasource.getPassword(), "UTF-8"),
+		 * datasource.getDatasourceName());
+		 */
+		/*
+		 * XMLA_SOAP xmlaSOAP = new XMLA_SOAP(datasource.getServerURL(),
+		 * URLEncoder.encode(datasource.getUsername(), "UTF-8"),
+		 * URLEncoder.encode(datasource.getPassword(), "UTF-8"),
+		 * datasource.getDatasourceName());
+		 */
 		XMLA_SOAP xmlaSOAP = new XMLA_SOAP(datasource.getServerURL(),
 				URLEncoder.encode(datasource.getUsername(), "UTF-8"),
-				URLEncoder.encode(datasource.getPassword(), "UTF-8"),
-				datasource.getDatasourceName());
+				URLEncoder.encode(datasource.getPassword(), "UTF-8"));
 		List cubeList = getCubesWithoutPerspectives(datasource.getCatalog(),
 				xmlaSOAP);
 		return cubeList;
@@ -182,10 +193,14 @@ public class XMLAUtils {
 		List dimensions = new ArrayList();
 		logger.info("get dimensions list from " + datasource.getServerURL()
 				+ " for cube " + cubeName);
-		XMLA_SOAP soap = new XMLA_SOAP(datasource.getServerURL(),
+		/*XMLA_SOAP soap = new XMLA_SOAP(datasource.getServerURL(),
 				URLEncoder.encode(datasource.getUsername(), "UTF-8"),
 				URLEncoder.encode(datasource.getPassword(), "UTF-8"),
-				datasource.getDatasourceName());
+				datasource.getDatasourceName());*/
+		
+		XMLA_SOAP soap = new XMLA_SOAP(datasource.getServerURL(),
+				URLEncoder.encode(datasource.getUsername(), "UTF-8"),
+				URLEncoder.encode(datasource.getPassword(), "UTF-8"));
 		Iterator olapItems = soap
 				.discoverDim(datasource.getCatalog(), cubeName).iterator();
 		while (olapItems.hasNext()) {
@@ -199,10 +214,16 @@ public class XMLAUtils {
 	public static List<String> discoverHier(XMLADatasource datasource,
 			String cube, String dimension) throws OlapException,
 			UnsupportedEncodingException {
+		/*
+		 * XMLA_SOAP soap = new XMLA_SOAP(datasource.getServerURL(),
+		 * URLEncoder.encode(datasource.getUsername(), "UTF-8"),
+		 * URLEncoder.encode(datasource.getPassword(), "UTF-8"),
+		 * datasource.getDatasourceName());
+		 */
+
 		XMLA_SOAP soap = new XMLA_SOAP(datasource.getServerURL(),
 				URLEncoder.encode(datasource.getUsername(), "UTF-8"),
-				URLEncoder.encode(datasource.getPassword(), "UTF-8"),
-				datasource.getDatasourceName());
+				URLEncoder.encode(datasource.getPassword(), "UTF-8"));
 
 		List hierarchies = new LinkedList();
 		Iterator hiers = soap.discoverHier(datasource.getCatalog(), cube,
@@ -223,10 +244,16 @@ public class XMLAUtils {
 			throws OlapException, UnsupportedEncodingException {
 		List measures = new LinkedList();
 
+		/*
+		 * XMLA_SOAP xmlaSoap = new XMLA_SOAP(datasource.getServerURL(),
+		 * URLEncoder.encode(datasource.getUsername(), "UTF-8"),
+		 * URLEncoder.encode(datasource.getPassword(), "UTF-8"),
+		 * datasource.getDatasourceName());
+		 */
+
 		XMLA_SOAP xmlaSoap = new XMLA_SOAP(datasource.getServerURL(),
 				URLEncoder.encode(datasource.getUsername(), "UTF-8"),
-				URLEncoder.encode(datasource.getPassword(), "UTF-8"),
-				datasource.getDatasourceName());
+				URLEncoder.encode(datasource.getPassword(), "UTF-8"));
 
 		Iterator olapItems = xmlaSoap.discoverMem(datasource.getCatalog(),
 				cube, "[Measures]", null, null).iterator();
@@ -237,28 +264,28 @@ public class XMLAUtils {
 
 		return measures;
 	}
-	
+
 	/**
 	 * 
 	 * @param datasource
 	 * @param mdxQuery
 	 * @return
-	 * @throws IOException 
-	 * @throws SAXException 
-	 * @throws OlapException 
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws OlapException
 	 */
 	public static XMLA_Model getOlapModel(XMLADatasource datasource,
 			String mdxQuery) throws SAXException, IOException, OlapException {
 		URL confUrl = XmlaQueryTag.class.getResource("config.xml");
-        XMLA_Model model = (XMLA_Model) ModelFactory.instance(confUrl);
-        model.setMdxQuery(mdxQuery);
-        model.setUri(datasource.getServerURL());
-        model.setCatalog(datasource.getCatalog());
-        model.setDataSource(datasource.getDatasourceName());
-        model.setUser(URLEncoder.encode(datasource.getUsername(), "UTF-8"));
-        model.setPassword(URLEncoder.encode(datasource.getPassword(), "UTF-8"));
-        logger.info("test message");
-        model.initialize();
-        return model;
+		XMLA_Model model = (XMLA_Model) ModelFactory.instance(confUrl);
+		model.setMdxQuery(mdxQuery);
+		model.setUri(datasource.getServerURL());
+		model.setCatalog(datasource.getCatalog());
+		model.setDataSource(datasource.getDatasourceName());
+		model.setUser(URLEncoder.encode(datasource.getUsername(), "UTF-8"));
+		model.setPassword(URLEncoder.encode(datasource.getPassword(), "UTF-8"));
+		logger.info("test message");
+		model.initialize();
+		return model;
 	}
 }

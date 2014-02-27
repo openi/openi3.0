@@ -46,7 +46,8 @@ public class ObjectFactory {
 		 * use WebAppClassLoader, throws ClassNotFoundException, as the openi
 		 * plugin related classes are not under webapps/../WEB-INF
 		 */
-		digester.setUseContextClassLoader(true);
+		//digester.setUseContextClassLoader(true);
+		digester.setClassLoader(ObjectFactory.class.getClassLoader());
 
 		ObjectHolder root = new ObjectHolder();
 		digester.push(root);

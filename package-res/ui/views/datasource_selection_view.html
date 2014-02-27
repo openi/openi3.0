@@ -22,7 +22,7 @@
 		
 		<script type="text/javascript" src="scripts/openi/Ajax.js"></script>
 		<script type="text/javascript" src="scripts/openi/AjaxIndicator.js"></script>
-		<script type="text/javascript" src="scripts/openi/OpenIAnalysis.js"></script>
+		<script type="text/javascript" src="scripts/openi/openi.js"></script>
 		<script type="text/javascript" src="scripts/openi/ComponentRenderer.js"></script>
 		<script type="text/javascript" src="scripts/openi/Rest.js"></script>
 		<script type="text/javascript" src="scripts/openi/OlapActions.js"></script>
@@ -120,7 +120,7 @@
 						var selectedMeasuresList = getSelectedMeasuresList();
 						if(selectedMeasuresList == "")
 							return false;
-						window.location.href = Rest.constructBaseURL() + "/openianalysis/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=new&selectedMeasures=" + selectedMeasuresList;
+						window.location.href = Rest.constructPluginContentBaseURL() + "/openi/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=new&selectedMeasures=" + selectedMeasuresList;
 					}
 					return false;
 				});
@@ -133,7 +133,7 @@
 						var selectedMeasuresList = getSelectedMeasuresList();
 						if(selectedMeasuresList == "")
 							return false;
-						window.location.href = Rest.constructBaseURL() + "/openianalysis/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=explore&selectedMeasures=" + selectedMeasuresList;
+						window.location.href = Rest.constructPluginContentBaseURL() + "/openi/RenderOAnalysis?datasourceType=" + datasourceType + "&datasource=" + datasource + "&cube=" + cube + "&actionType=explore&selectedMeasures=" + selectedMeasuresList;
 					}
 					return false;
 				});
@@ -177,7 +177,7 @@
 
 			function populateCubes(datasourceType, datasource) {
 				var requestType = "GET";
-				var actionPath = datasourceType + "/datasources/" + datasource + "/cubes/";
+				var actionPath = datasourceType + "/datasources/" + datasource + "/cubes";
 				var dataParams = {
 				};
 				var asyncType = false;
@@ -193,7 +193,7 @@
 			
 			function populateMeasures(datasourceType, datasource, cube) {
 				var requestType = "GET";
-				var actionPath = datasourceType + "/datasources/" + datasource + "/" + cube + "/measures/";
+				var actionPath = datasourceType + "/datasources/" + datasource + "/" + cube + "/measures";
 				var dataParams = {
 				};
 				var asyncType = false;

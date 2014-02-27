@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 
 import org.apache.log4j.LogManager;
@@ -85,6 +86,25 @@ public class XMLBeanHelper {
 		} finally {
 			try {
 				reader.close();
+			} catch (IOException e) {
+				logger.warn(e);
+			}
+		}
+
+		return obj;
+	}
+	
+	public Object xmlStreamToBean(InputStream xmlStream) throws SerializationException {
+		Object obj = null;
+
+		try {
+			obj = this.binder.fromXML(xmlStream);
+		} catch (ConversionException e) {
+			throw new SerializationException(
+					"Trouble restoring bean, caught ConversionException: ", e);
+		} finally {
+			try {
+				xmlStream.close();
 			} catch (IOException e) {
 				logger.warn(e);
 			}

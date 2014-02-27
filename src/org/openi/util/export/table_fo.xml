@@ -53,7 +53,7 @@
 				<fo:block text-align="center" space-after="8em">
 					<fo:external-graphic scaling="uniform"
 						content-height="251px" content-width="1049px"
-						src="url('http://localhost:8090/pentaho/content/openianalytics/api/wcfCompResource/wcfChartComp?pivotID=9a4fc91e-f973-11e0-a970-a71ea8bdce5b')" />
+						src="url('http://localhost:8090/pentaho/content/openianalytics/api/wcfCompResource/wcfChartComp?inline=false&amp;pivotID=9a4fc91e-f973-11e0-a970-a71ea8bdce5b')" />
 				</fo:block>
 				<fo:block font-size="10pt">
 					<fo:table table-layout="fixed" width="100%">

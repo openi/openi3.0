@@ -128,6 +128,11 @@ public class AnalysisHelper {
 		return slicer.toString();
 	}
 	
+	/**
+	 * 
+	 * @param olapModel
+	 * @return
+	 */
 	public static List<SlicerValue> buildSlicerAsObjects(OlapModel olapModel) {
 		List<SlicerValue> slicerValueObjects = new ArrayList<SlicerValue>();
 

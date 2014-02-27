@@ -225,7 +225,8 @@ exclude-result-prefixes="fo">
                           <xsl:value-of select = "$reportTitle"/>
                         </fo:block>
 
-                          <!-- chart on first page only  -->
+                          <!-- chart on first page only  
+                       
                             <xsl:if test = "$chartimage">
                                 <fo:block text-align="center" space-after="8em">
                                     <fo:external-graphic xmlns:fo="http://www.w3.org/1999/XSL/Format" scaling="uniform">
@@ -245,7 +246,7 @@ exclude-result-prefixes="fo">
                                     <fo:block break-after="page"/>
                                 </xsl:if>
                             </xsl:if> 
-
+ 							-->
                             <fo:block font-size="10pt">
                                 <fo:table table-layout="fixed">
                                 <xsl:attribute name="width">

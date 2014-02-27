@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.MDC;
+import org.dom4j.Document;
 import org.openi.analysis.Analysis;
 import org.openi.analysis.AnalysisHelper;
 import org.openi.datasource.Datasource;
@@ -29,19 +31,20 @@ import org.openi.util.plugin.ViewParamResolver;
 import org.openi.util.serialize.XMLBeanHelper;
 import org.openi.util.wcf.WCFUtils;
 import org.pentaho.platform.engine.services.solution.SimpleContentGenerator;
+import org.pentaho.platform.engine.services.solution.SimpleParameterSetter;
 import org.pentaho.platform.api.engine.IParameterProvider;
 import org.pentaho.platform.api.engine.IPentahoSession;
 import org.pentaho.platform.api.engine.IPluginManager;
-import org.pentaho.platform.api.engine.InvalidParameterException;
 import org.pentaho.platform.api.repository.IContentItem;
-import org.pentaho.platform.api.repository.ISolutionRepository;
-import org.pentaho.platform.engine.core.solution.ActionInfo;
+import org.pentaho.platform.api.repository2.unified.IUnifiedRepository;
+import org.pentaho.platform.api.repository2.unified.RepositoryFile;
+import org.pentaho.platform.api.repository2.unified.data.simple.SimpleRepositoryFileData;
+import org.pentaho.platform.engine.core.solution.SimpleParameterProvider;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.platform.plugin.services.pluginmgr.PluginClassLoader;
 import org.pentaho.platform.util.UUIDUtil;
 import org.pentaho.platform.util.messages.LocaleHelper;
-import org.pentaho.platform.web.http.PentahoHttpSessionHelper;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.tonbeller.wcf.controller.Controller;
@@ -60,31 +63,113 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 	private static final Log logger = LogFactory
 			.getLog(OpenIAnalysisContentGenerator.class);
 
+	private static final String TEXT_HTML = "text/html"; //$NON-NLS-1$
+	private IParameterProvider requestParameters;
+	private IParameterProvider pathParameters;
+	private String path = null;
+	private String contentType = null;
+	private String actionType = null;
+
 	private static final String RENDER_OPENI_ANALYSIS = "/RenderOAnalysis";
 	public static final String PLUGIN_NAME = "openi";
 	private static final String MIME_HTML = "text/html";
 	public String RELATIVE_URL;
 
+	public Map<String, IParameterProvider> getParameterProviders() {
+		return this.parameterProviders;
+	}
+
+	@SuppressWarnings("unchecked")
+	private IParameterProvider getRequestParameters() {
+		if (this.requestParameters != null) {
+			return this.requestParameters;
+		}
+
+		if (this.parameterProviders == null) {
+			return new SimpleParameterProvider();
+		}
+
+		IParameterProvider requestParams = this.parameterProviders
+				.get("request"); //$NON-NLS-1$
+		SimpleParameterSetter parameters = new SimpleParameterSetter();
+		Iterator requestParamIterator = requestParams.getParameterNames();
+		while (requestParamIterator.hasNext()) {
+			String param = (String) requestParamIterator.next();
+			parameters.setParameter(param, requestParams.getParameter(param));
+		}
+		this.requestParameters = parameters;
+		return parameters;
+	}
+
+	@SuppressWarnings("unchecked")
+	public IParameterProvider getPathParameters() {
+		if (this.pathParameters != null) {
+			return this.pathParameters;
+		}
+
+		IParameterProvider pathParams = this.parameterProviders.get("path"); //$NON-NLS-1$
+		SimpleParameterSetter parameters = new SimpleParameterSetter();
+		Iterator pathParamIterator = pathParams.getParameterNames();
+		while (pathParamIterator.hasNext()) {
+			String param = (String) pathParamIterator.next();
+			parameters.setParameter(param, pathParams.getParameter(param));
+		}
+
+		this.pathParameters = parameters;
+		return parameters;
+	}
+
+	public String getMimeType() {
+		IParameterProvider requestParams = getRequestParameters();
+		IParameterProvider pathParams = getPathParameters();
+
+		if ((requestParams != null)
+				&& (requestParams.getStringParameter("contentType", null) != null)) { //$NON-NLS-1$
+			contentType = requestParams.getStringParameter(
+					"contentType", TEXT_HTML); //$NON-NLS-1$
+		} else if ((pathParams != null)
+				&& (pathParams.getStringParameter("contentType", null) != null)) { //$NON-NLS-1$
+			contentType = pathParams.getStringParameter(
+					"contentType", TEXT_HTML); //$NON-NLS-1$
+		}
+		return contentType;
+	}
+
 	@Override
 	public void createContent() throws Exception {
-		logger.info("content generator");
-		if (outputHandler == null) {
-			logger.error("Outputhandler is null");
-			throw new InvalidParameterException("Outputhandler is null");
+
+		IParameterProvider requestParams = getRequestParameters();
+		IParameterProvider pathParams = getPathParameters();
+
+		if ((requestParams != null)
+				&& (requestParams.getStringParameter("path", null) != null)) //$NON-NLS-1$
+		{
+			path = URLDecoder.decode(
+					requestParams.getStringParameter("path", ""), "UTF-8"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		} else if ((pathParams != null)
+				&& (pathParams.getStringParameter("path", null) != null)) { //$NON-NLS-1$
+			path = URLDecoder.decode(
+					pathParams.getStringParameter("path", ""), "UTF-8"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 
-		IParameterProvider requestParams = parameterProviders
-				.get(IParameterProvider.SCOPE_REQUEST);
-		if (requestParams == null) {
-			logger.error("Parameter provider is null");
-			throw new NullPointerException("Parameter provider is null");
+		if ((requestParams != null)
+				&& (requestParams.getStringParameter("contentType", null) != null)) { //$NON-NLS-1$
+			contentType = requestParams.getStringParameter(
+					"contentType", TEXT_HTML); //$NON-NLS-1$
+		} else if ((pathParams != null)
+				&& (pathParams.getStringParameter("contentType", null) != null)) { //$NON-NLS-1$
+			contentType = pathParams.getStringParameter(
+					"contentType", TEXT_HTML); //$NON-NLS-1$
 		}
 
-		String solution = requestParams.getStringParameter("solution", null);
-		String path = requestParams.getStringParameter("path", null);
-		String action = requestParams.getStringParameter("action", null);
-		String actionType = requestParams
-				.getStringParameter("actionType", null);
+		if ((requestParams != null)
+				&& (requestParams.getStringParameter("actionType", null) != null)) { //$NON-NLS-1$
+			actionType = requestParams.getStringParameter(
+					"actionType", TEXT_HTML); //$NON-NLS-1$
+		} else if ((pathParams != null)
+				&& (pathParams.getStringParameter("actionType", null) != null)) { //$NON-NLS-1$
+			actionType = pathParams.getStringParameter("actionType", TEXT_HTML); //$NON-NLS-1$
+		}
 
 		if (actionType != null && actionType.equals("new")) {
 			String datasourceType = requestParams.getStringParameter(
@@ -93,7 +178,8 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 					null);
 			String cube = requestParams.getStringParameter("cube", null);
 			String mdxQuery = requestParams.getStringParameter("mdx", null);
-			String selectedMeasures = requestParams.getStringParameter("selectedMeasures", null);
+			String selectedMeasures = requestParams.getStringParameter(
+					"selectedMeasures", null);
 			if (datasourceType == null || datasourceType.equals("")
 					|| datasource == null || datasource.equals("")
 					|| cube == null || cube.equals("")) {
@@ -114,7 +200,8 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 				else
 					newAnalysis.setMdxQuery(AnalysisHelper.generateDefaultMdx(
 							dsType,
-							dsService.getDatasource(datasource, dsType), cube, selectedMeasures));
+							dsService.getDatasource(datasource, dsType), cube,
+							selectedMeasures));
 				if (newAnalysis == null) {
 					logger.error("Error while generating new analysis");
 					throw new NullPointerException(
@@ -134,44 +221,51 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 			}
 
 		} else if (actionType != null && actionType.equals("view")) {
-			String fullPath = ActionInfo.buildSolutionPath(solution, path,
-					action);
-			HttpServletRequest request = (HttpServletRequest) parameterProviders
-					.get("path").getParameter("httprequest");
-			HttpServletResponse response = (HttpServletResponse) parameterProviders
-					.get("path").getParameter("httpresponse");
+			if (path != null && path.length() > 0) {
+				IUnifiedRepository repository = PentahoSystem.get(
+						IUnifiedRepository.class, null);
+				RepositoryFile repoFile = repository.getFile(path);
 
-			ISolutionRepository repository = PentahoSystem.get(
-					ISolutionRepository.class, userSession);
+				HttpServletRequest httpRequest = (HttpServletRequest) pathParams
+						.getParameter("httprequest"); //$NON-NLS-1$
 
-			if (repository == null) {
-				logger.error("Access to Repository has failed");
-				throw new NullPointerException(
-						"Access to Repository has failed");
-			}
-			if (repository.resourceExists(fullPath)) {
-				String xml = repository.getResourceAsString(fullPath);
-				XMLBeanHelper xmlBeanHelper = new XMLBeanHelper();
-				Analysis analysis = (Analysis) xmlBeanHelper
-						.xmlStringToBean(xml);
-				if (analysis == null) {
-					logger.error("Error retrieving analysis file from solution repository");
-					throw new NullPointerException(
-							"Error retrieving analysis file from solution repository");
+				HttpServletResponse httpResponse = (HttpServletResponse) pathParams
+						.getParameter("httpresponse"); //$NON-NLS-1$
+
+				if (repoFile != null) {
+
+					Document document = null;
+					SimpleRepositoryFileData data = repository.getDataForRead(
+							repoFile.getId(), SimpleRepositoryFileData.class);
+					if (data != null) {
+						
+						XMLBeanHelper xmlBeanHelper = new XMLBeanHelper();
+						Analysis analysis = (Analysis) xmlBeanHelper.xmlStreamToBean(data.getInputStream());
+						
+						if(logger.isDebugEnabled())
+							logger.debug("Analysis File Content: " + xmlBeanHelper.beanToXMLString(analysis));
+						
+						if (analysis == null) {
+							logger.error("Error retrieving analysis file from solution repository");
+							throw new NullPointerException(
+									"Error retrieving analysis file from solution repository");
+						}
+
+						currentAnalysis = analysis;
+
+						if (logger.isInfoEnabled())
+							logger.info("Loading Analysis from " + path);
+						loadAnalysis(analysis, httpRequest, httpResponse);
+					}
+
 				}
-
-				currentAnalysis = analysis;
-
-				if (logger.isInfoEnabled())
-					logger.info("Loading Analysis from " + fullPath);
-				loadAnalysis(analysis, request, response);
 
 			}
 		}
 		try {
 
 			IContentItem contentItem = outputHandler.getOutputContentItem(
-					"response", "content", "", instanceId, getMimeType()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					"response", "content", instanceId, getMimeType()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 			if (contentItem == null) {
 				logger.error("content item is null"); //$NON-NLS-1$
@@ -214,7 +308,8 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 			String datasource = requestParams.getStringParameter("datasource",
 					null);
 			String cube = requestParams.getStringParameter("cube", null);
-			String selectedMeasures = requestParams.getStringParameter("selectedMeasures", null);
+			String selectedMeasures = requestParams.getStringParameter(
+					"selectedMeasures", null);
 			String htmlStr = "";
 			File viewFile = null;
 
@@ -247,13 +342,13 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 
 				String jsScript = "<script language=\"javascript\">\r\nfunction populateDatasources(){\r\n";
 				jsScript += "jQuery(\"#select-datasource-type\").change(function() {\r\n";
-				
+
 				jsScript += "jQuery(\"#select-datasource\").find(\"option\").remove();";
 				jsScript += "jQuery(\"#select-cube\").find(\"option\").remove();";
-				
+
 				jsScript += "jQuery(\"#select-datasource\").append(jQuery(\"<option></option>\").val(\"Select Catalog\").html(\"Select Catalog\"));";
 				jsScript += "jQuery(\"#select-cube\").append(jQuery(\"<option></option>\").val(\"Select Cube\").html(\"Select Cube\"));";
-				
+
 				jsScript += "var selectedDatasourceType = jQuery(this).val()\r\n";
 				jsScript += "if(selectedDatasourceType == \"XMLA\") {\r\n";
 
@@ -314,7 +409,8 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 
 					CubeDataExplorer dataExplorer = new CubeDataExplorer(
 							dsType,
-							dsService.getDatasource(datasource, dsType), cube, selectedMeasures);
+							dsService.getDatasource(datasource, dsType), cube,
+							selectedMeasures);
 					Map queriesMap = dataExplorer.generateMeasureByDimQueries();
 
 					String jsScript = "<script language=\"javascript\">\r\n jQuery(document).ready(function(){var edaWidgets = [];\r\n";
@@ -398,7 +494,7 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 		request.setAttribute("com.tonbeller.wcf.component.RendererParameters",
 				map);
 		addAnalysisToSession(currAnalysisPivotID, analysis,
-				PentahoHttpSessionHelper.getPentahoSession(request));
+				PentahoSessionHolder.getSession());
 		AnalysisHelper.loadAnalysis(analysis, wcfcontext, currAnalysisPivotID);
 
 	}
@@ -412,10 +508,6 @@ public class OpenIAnalysisContentGenerator extends SimpleContentGenerator {
 			userSession.setAttribute("loadedAnalyses", loadedAnalyses);
 		}
 		loadedAnalyses.put(pivotID, analysis);
-	}
-
-	public String getMimeType() {
-		return "text/html";
 	}
 
 	public Log getLogger() {

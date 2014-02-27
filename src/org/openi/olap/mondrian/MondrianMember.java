@@ -74,7 +74,7 @@ public class MondrianMember implements Member, MDXMember {
 	 * @see com.tonbeller.jpivot.olap.model.Member#getRootDistance()
 	 */
 	public int getRootDistance() {
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 		mondrian.olap.Member m = monMember;
 		int rootDistance = 0;
 		while (true) {

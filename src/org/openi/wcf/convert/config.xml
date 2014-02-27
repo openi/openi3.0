@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<converter class="org.openi.wcf.convert.ConverterImpl">
+  <handler elementName="textField" class="org.openi.wcf.convert.EditCtrlConverter"/>
+  <handler elementName="label" class="org.openi.wcf.convert.EditCtrlConverter"/>
+  <handler elementName="password" class="org.openi.wcf.convert.EditCtrlConverter"/>
+  <handler elementName="textArea" class="org.openi.wcf.convert.EditCtrlConverter"/>
+  <handler elementName="checkBox" class="org.openi.wcf.convert.CheckBoxConverter"/>
+  <handler elementName="radioButton" class="org.openi.wcf.convert.RadioButtonConverter"/>
+  <handler elementName="listBox1" class="org.openi.wcf.convert.SelectSingleConverter"/>
+  <handler elementName="listBoxN" class="org.openi.wcf.convert.SelectMultipleConverter"/>
+  <handler elementName="radioButtons" class="org.openi.wcf.convert.SelectSingleConverter"/>
+  <handler elementName="checkBoxes" class="org.openi.wcf.convert.SelectMultipleConverter"/>
+  <handler elementName="fileUpload" class="org.openi.wcf.convert.FileUploadConverter"/>
+</converter>

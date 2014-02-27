@@ -20,8 +20,8 @@ import org.openi.table.DrillReplaceUI;
 import org.openi.table.DrillThroughUI;
 import org.openi.table.SortRankUI;
 import org.openi.util.file.FileUtils;
+import org.openi.wcf.table.ITableComponent;
 import org.openi.web.rest.QueryResource;
-
 import org.openi.navigator.hierarchy.AbstractCategory;
 import org.openi.navigator.hierarchy.HierarchyItem;
 import org.openi.navigator.hierarchy.HierarchyNavigator;
@@ -30,7 +30,6 @@ import org.openi.navigator.member.SelectionMgr.SelectionHandler;
 import org.openi.olap.drillthrough.DrillthroughHelper;
 import org.openi.olap.mondrian.MondrianMember;
 import org.openi.olap.xmla.XMLA_Member;
-
 import org.w3c.dom.Element;
 
 import com.tonbeller.jpivot.olap.model.Member;
@@ -43,7 +42,6 @@ import com.tonbeller.jpivot.table.navi.SwapAxesUI;
 import com.tonbeller.wcf.controller.RequestContext;
 import com.tonbeller.wcf.controller.RequestListener;
 import com.tonbeller.wcf.selection.SelectionModel;
-import com.tonbeller.wcf.table.ITableComponent;
 import com.tonbeller.wcf.ui.RadioButton;
 
 /**

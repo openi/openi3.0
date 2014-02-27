@@ -4,7 +4,8 @@ import java.net.URL;
 
 import org.openi.olap.OlapModelTag;
 import org.openi.olap.mondrian.MondrianModelFactory.Config;
-import org.pentaho.platform.api.data.IDatasourceService;
+import org.pentaho.platform.api.data.IDBDatasourceService;
+//import org.pentaho.platform.api.data.IDatasourceService;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 
 import com.tonbeller.jpivot.olap.model.OlapModel;
@@ -132,19 +133,20 @@ public class MondrianOlapModelTag extends OlapModelTag {
 	@Override
 	protected OlapModel getOlapModel(RequestContext context) throws Exception {
 		MondrianModelFactory.Config cfg = new MondrianModelFactory.Config();
-		URL schemaUrl;
+		/*URL schemaUrl;
 		if (catalogUri.startsWith("/"))
 			schemaUrl = pageContext.getServletContext().getResource(catalogUri);
 		else
 			schemaUrl = new URL(catalogUri);
 		if (schemaUrl == null)
-			throw new Exception("could not find Catalog \"" + catalogUri + "\"");
+			throw new Exception("could not find Catalog \"" + catalogUri + "\""); */
 
 		// cfg.setMdxQuery(getBodyContent().getString());
 		cfg.setMdxQuery(getMdxQuery());
 		// Add the schema URL. Enclose the value in quotes to permit
 		// schema URLs that include things like ;jsessionid values.
-		cfg.setSchemaUrl("\"" + schemaUrl.toExternalForm() + "\"");
+		//cfg.setSchemaUrl("\"" + schemaUrl.toExternalForm() + "\"");
+		cfg.setSchemaUrl("\"" + catalogUri + "\"");
 		cfg.setJdbcUrl(jdbcUrl);
 		cfg.setJdbcDriver(jdbcDriver);
 		cfg.setJdbcUser(jdbcUser);
@@ -155,8 +157,11 @@ public class MondrianOlapModelTag extends OlapModelTag {
 		cfg.setDynLocale(dynLocale);
 		cfg.setConnectionPooling(connectionPooling);
 		cfg.setDataSourceChangeListener(dataSourceChangeListener);
-		IDatasourceService datasourceService = PentahoSystem
-				.getObjectFactory().get(IDatasourceService.class, null);
+		//IDatasourceService datasourceService = PentahoSystem
+			//	.getObjectFactory().get(IDatasourceService.class, null);
+		
+		IDBDatasourceService datasourceService = PentahoSystem.getObjectFactory().get(IDBDatasourceService.class, null);
+		
 		cfg.setExternalDataSource(datasourceService.getDataSource(dataSource));
 		allowOverride(context, cfg);
 

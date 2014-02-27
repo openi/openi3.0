@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.openi.wcf.table.EditableTableComponent;
+import org.openi.wcf.table.EmptyTableModel;
+import org.openi.wcf.table.ITableComponent;
 import org.w3c.dom.Element;
 
 import com.tonbeller.jpivot.core.ModelChangeEvent;
@@ -22,7 +25,9 @@ import com.tonbeller.wcf.controller.Dispatcher;
 import com.tonbeller.wcf.controller.DispatcherSupport;
 import com.tonbeller.wcf.controller.RequestContext;
 import com.tonbeller.wcf.controller.RequestListener;
-import com.tonbeller.wcf.table.*;
+import com.tonbeller.wcf.table.TableColumn;
+import com.tonbeller.wcf.table.TableModel;
+import com.tonbeller.wcf.table.TableModelDecorator;
 import com.tonbeller.wcf.utils.DomUtils;
 
 /**

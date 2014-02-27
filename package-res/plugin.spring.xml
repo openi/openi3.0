@@ -17,6 +17,7 @@
 
 	<context:annotation-config />
 
+<!-- 
 	<bean id="enunciatePluginServlet" class="org.openi.pentaho.plugin.EnunciateJerseyPluginServlet">
 		<property name="initParams">
 			<map>
@@ -30,7 +31,10 @@
 			</map>
 		</property>
 	</bean>
-
+	 -->
+	 
+	<bean id="api" class="org.openi.pentaho.plugin.ExtendedJAXRSPluginServlet"/>
+	
 	<bean id="wcfComponentServlet" class="org.openi.web.servlet.WCFComponentServlet" />
 	
 	<bean id="chartServlet" class="org.openi.web.servlet.ChartServlet" />
@@ -81,5 +85,11 @@
 	<bean class="org.openi.web.rest.ExploreDataResource">
 		<property name="exploreDataService" ref="exploreDataService" />
 	</bean>
-	
+
+	 <bean id="openi.run" class="org.pentaho.platform.plugin.services.webservices.content.PluginFileContentGenerator" scope="prototype">
+        <property name="mimeType" value="text/html" />
+        <property name="relativeFilePath" value="ui/views/redirect.html" />
+        <property name="pluginId" value="openi" />
+    </bean>
+    
 </beans>

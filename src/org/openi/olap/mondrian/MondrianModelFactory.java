@@ -9,7 +9,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.pentaho.platform.api.data.IDatasourceService;
+import org.pentaho.platform.api.data.IDBDatasourceService;
+//import org.pentaho.platform.api.data.IDatasourceService;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.xml.sax.SAXException;
 
@@ -99,10 +100,12 @@ public class MondrianModelFactory {
 		String dsName = "java:comp/env/" + dataSourceName;
 		try {
 			// dataSource = (DataSource) new InitialContext().lookup(dsName);
-			IDatasourceService datasourceService = PentahoSystem
-					.getObjectFactory().get(IDatasourceService.class, null);
+			//IDatasourceService datasourceService = PentahoSystem
+				//	.getObjectFactory().get(IDatasourceService.class, null);
+			IDBDatasourceService datasourceService = PentahoSystem.getObjectFactory().get(IDBDatasourceService.class, null);
 			dataSource = datasourceService.getDataSource(dataSourceName);
 			connection = dataSource.getConnection();
+			
 		} catch (Throwable e) {
 			String msg = "Datasource " + dsName + " is not configured properly";
 			logger.error(msg, e);

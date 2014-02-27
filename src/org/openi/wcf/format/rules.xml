@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<digester-rules>
+  <pattern value="formatters">
+    <pattern value="formatter">
+      <object-create-rule attrname="handler"/>
+      <set-properties-rule/>
+      <set-next-rule methodname="addHandler"/>
+      <pattern value="locale">
+        <object-create-rule classname="org.openi.wcf.format.Pattern"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addPattern"/>
+      </pattern>
+    </pattern>
+  </pattern>
+</digester-rules>

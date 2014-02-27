@@ -2,16 +2,14 @@
 <DataSources>
   <DataSource name="XMLA_SteelWheels">
     <Server>http://localhost:8080/pentaho/Xmla</Server>
-    <DatasourceName>Provider=Mondrian;DataSource=Pentaho</DatasourceName>
 	<Catalog>SteelWheels</Catalog>
-	<Username>joe</Username>
+	<Username>admin</Username>
 	<Password>password</Password>
   </DataSource>
   <DataSource name="XMLA_SampleData">
     <Server>http://localhost:8080/pentaho/Xmla</Server>
-    <DatasourceName>Provider=Mondrian;DataSource=Pentaho</DatasourceName>
 	<Catalog>SampleData</Catalog>
-	<Username>joe</Username>
+	<Username>admin</Username>
 	<Password>password</Password>
   </DataSource>
 </DataSources>

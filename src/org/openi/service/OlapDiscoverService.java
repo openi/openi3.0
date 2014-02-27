@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openi.acl.AccessDeniedException;
 import org.openi.datasource.DatasourceType;
 import org.openi.datasource.MondrianDatasource;
@@ -23,26 +25,37 @@ import com.tonbeller.jpivot.olap.model.OlapException;
  */
 public class OlapDiscoverService {
 
+	private static final Log logger = LogFactory
+			.getLog(OlapDiscoverService.class);
+
 	/**
 	 * 
 	 * @param dsType
 	 * @param dsName
 	 * @return
-	 * @throws UnsupportedEncodingException 
-	 * @throws OlapException 
-	 * @throws AccessDeniedException 
+	 * @throws UnsupportedEncodingException
+	 * @throws OlapException
+	 * @throws AccessDeniedException
 	 * @throws ServiceException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> discoverCubes(String dsType, String dsName) throws OlapException, UnsupportedEncodingException, AccessDeniedException {
+	public List<String> discoverCubes(String dsType, String dsName)
+			throws UnsupportedEncodingException,
+			AccessDeniedException, OlapException {
 		List<String> cubes = null;
 		if (dsType.equals(DatasourceType.XMLA.toString())) {
-			cubes = XMLAUtils.getCubesList((XMLADatasource) this.dsService
-					.getDatasource(dsName, DatasourceType.XMLA));
-		}
-		else if(dsType.equals(DatasourceType.MONDRIAN.toString())) {
-			cubes = MondrianHelper.getCubesList((MondrianDatasource) this.dsService
-					.getDatasource(dsName, DatasourceType.MONDRIAN));
+			XMLADatasource xmlaDS = (XMLADatasource) this.dsService
+					.getDatasource(dsName, DatasourceType.XMLA);
+			try {
+				cubes = XMLAUtils.getCubesList(xmlaDS);
+			} catch (OlapException e) {
+				logger.error(e);
+				throw new OlapException(e);
+			}
+		} else if (dsType.equals(DatasourceType.MONDRIAN.toString())) {
+			cubes = MondrianHelper
+					.getCubesList((MondrianDatasource) this.dsService
+							.getDatasource(dsName, DatasourceType.MONDRIAN));
 		}
 		return cubes;
 	}
@@ -65,16 +78,17 @@ public class OlapDiscoverService {
 	 * @return
 	 * @throws AccessDeniedException
 	 */
-	public Collection<String> discoverMeasures(String datasourceType,
+	public List<String> discoverMeasures(String datasourceType,
 			String datasource, String cube) throws AccessDeniedException {
 		DatasourceType dsType = null;
-		if (datasourceType.equals(DatasourceType.XMLA.toString())) 
+		if (datasourceType.equals(DatasourceType.XMLA.toString()))
 			dsType = DatasourceType.XMLA;
 		else
 			dsType = DatasourceType.MONDRIAN;
-		CubeDataExplorer cubeDataExplorer = new CubeDataExplorer(dsType, this.dsService.getDatasource(datasource, dsType), cube, "");
+		CubeDataExplorer cubeDataExplorer = new CubeDataExplorer(dsType,
+				this.dsService.getDatasource(datasource, dsType), cube, "");
 		List measuresList = cubeDataExplorer.getMeasuresList();
-		if(measuresList == null)
+		if (measuresList == null)
 			measuresList = new ArrayList();
 		return measuresList;
 	}

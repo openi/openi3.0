@@ -18,7 +18,7 @@ import mondrian.util.Pair;
 import org.apache.log4j.Logger;
 import org.openi.datasource.MondrianDatasource;
 import org.pentaho.commons.connection.IPentahoConnection;
-import org.pentaho.platform.api.data.IDatasourceService;
+import org.pentaho.platform.api.data.IDBDatasourceService;
 import org.pentaho.platform.api.engine.IConnectionUserRoleMapper;
 import org.pentaho.platform.api.engine.ObjectFactoryException;
 import org.pentaho.platform.api.engine.PentahoAccessControlException;
@@ -30,6 +30,11 @@ import org.pentaho.platform.plugin.action.mondrian.catalog.MondrianCatalog;
 import org.pentaho.platform.plugin.action.mondrian.catalog.MondrianCube;
 import org.pentaho.platform.plugin.services.connections.mondrian.MDXConnection;
 
+/**
+ * 
+ * @author SUJEN
+ *
+ */
 public class MondrianHelper {
 
 	private static Logger logger = Logger.getLogger(MondrianHelper.class);
@@ -69,10 +74,14 @@ public class MondrianHelper {
 	public static Dimension[] getDimensionList(MondrianDatasource mondrianDS,
 			String cubeName) throws ObjectFactoryException {
 		MondrianCatalog catalog = mondrianDS.getMondrianCatalog();
-		IDatasourceService datasourceService = PentahoSystem.getObjectFactory()
-				.get(IDatasourceService.class, null);
-		String jndiDS = datasourceService.getDSUnboundName(catalog
-				.getEffectiveDataSource().getJndi());
+		//IDatasourceService datasourceService = PentahoSystem.getObjectFactory()
+			//	.get(IDatasourceService.class, null);
+		//String jndiDS = datasourceService.getDSUnboundName(catalog
+		//.getEffectiveDataSource().getJndi());
+		IDBDatasourceService datasourceService = PentahoSystem.getObjectFactory().get(IDBDatasourceService.class, null);
+		String jndiDS = datasourceService.getDSUnboundName(catalog.getJndi());
+        
+		
 
 		Properties properties = new Properties();
 		properties.put(RolapConnectionProperties.Catalog.name(),
@@ -193,7 +202,7 @@ public class MondrianHelper {
 		if (measureDim.isMeasures()) {
 			Schema schema = measureDim.getSchema();
 			Hierarchy measureHier = measureDim.getHierarchy();
-			List<Member> measures = schema.getSchemaReader().getLevelMembers(
+			List<Member> measures = schema.getSchemaReader().withLocus().getLevelMembers(
 					measureHier.getLevels()[0], false);
 			Iterator<Member> measuresItr = measures.iterator();
 			while (measuresItr.hasNext()) {

@@ -1,6 +1,7 @@
 package org.openi.service;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.StringWriter;
@@ -11,6 +12,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.openi.analysis.Analysis;
 import org.openi.analysis.AnalysisHelper;
@@ -31,10 +33,13 @@ import org.openi.util.wcf.WCFUtils;
 import org.openi.util.xml.XmlUtils;
 import org.openi.wcf.component.WCFComponentType;
 import org.openi.web.rest.AnalysisResource;
-import org.pentaho.platform.api.repository.ISolutionRepository;
+import org.pentaho.platform.api.repository2.unified.IUnifiedRepository;
+import org.pentaho.platform.api.repository2.unified.RepositoryFile;
+import org.pentaho.platform.api.repository2.unified.data.simple.SimpleRepositoryFileData;
 import org.pentaho.platform.engine.core.solution.ActionInfo;
 import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
+import org.pentaho.platform.util.messages.LocaleHelper;
 import org.w3c.dom.Document;
 
 import com.tonbeller.jpivot.olap.model.OlapModel;
@@ -334,16 +339,16 @@ public class AnalysisService {
 		String url = scheme + "://" + host + ":" + port + location;
 
 		if (analysis.isShowChart()) {
-			/*String chartResourceURL = url
-					+ "/content/openianalytics/api/wcfCompResource/";
+			String chartResourceURL = url
+					+ "/plugin/openi/api/wcfCompResource/";
 			chartResourceURL += "wcfChartComp";
-			chartResourceURL += "?pivotID=" + pivotID + "&chartWidth="
+			chartResourceURL += "?inline=true&amp;pivotID=" + pivotID + "&chartWidth="
 					+ analysis.getChartWidth() + "&chartHeight="
 					+ analysis.getChartHeight() + "&chartType="
 					+ analysis.getChartType();
 
-			chartHTML = "<img src=\"" + chartResourceURL + "\" />";*/
-			EnhancedChartComponent chartComp = (EnhancedChartComponent) context.getSession()
+			chartHTML = "<img src=\"" + chartResourceURL + "\" />";
+			/*EnhancedChartComponent chartComp = (EnhancedChartComponent) context.getSession()
 					.getAttribute("chart" + pivotID);
 			if (chartComp == null) {
 				throw new Exception("Chart Component identified by " + "chart"
@@ -359,7 +364,7 @@ public class AnalysisService {
 			StreamResult result = new StreamResult(sw);
 			transformer.transform(source, result);
 
-			chartHTML = sw.toString();
+			chartHTML = sw.toString();*/
 		}
 
 		File viewFile = new File(PluginUtils.getPluginDir(),
@@ -396,7 +401,7 @@ public class AnalysisService {
 	 * @param context
 	 * @throws Exception
 	 */
-	public void saveAnalysisReport(String pivotID, String filename,
+	public void saveAnalysisReport(String pivotID, String fileName,
 			String solution, String path, String type, boolean overwrite,
 			RequestContext context) throws Exception {
 		Map loadedAnalyses = (Map) context.getSession().getAttribute(
@@ -406,30 +411,75 @@ public class AnalysisService {
 			throw new Exception("analysis not loaded properly");
 		}
 
-		if(!filename.endsWith("." + PluginConstants.PLUGIN_CONTENT_TYPE))
-			analysis.setAnalysisTitle(filename);
+		if(!fileName.endsWith("." + PluginConstants.PLUGIN_CONTENT_TYPE)) {
+			analysis.setAnalysisTitle(fileName);
+			fileName += "." + PluginConstants.PLUGIN_CONTENT_TYPE;
+		}
 		else
-			analysis.setAnalysisTitle(filename.substring(0, filename.indexOf("." + PluginConstants.PLUGIN_CONTENT_TYPE)));
+			analysis.setAnalysisTitle(fileName.substring(0, fileName.indexOf("." + PluginConstants.PLUGIN_CONTENT_TYPE)));
 		OlapModel olapModel = (OlapModel) context.getSession().getAttribute(
 				"xmlaQuery" + pivotID);
 		analysis.setMdxQuery(AnalysisHelper.getMDXFromOlapModel(olapModel));
 
-		ISolutionRepository repository = PentahoSystem.get(
-				ISolutionRepository.class, PentahoSessionHolder.getSession());
+		//ISolutionRepository repository = PentahoSystem.get(
+			//	ISolutionRepository.class, PentahoSessionHolder.getSession());
+		
+		
+		RepositoryFile analysisFile = null;
+		IUnifiedRepository repository = PentahoSystem.get(IUnifiedRepository.class);
 		if (repository == null) {
 			throw new NullPointerException("Access to Repository has failed");
 		}
+		
+	     
+		XMLBeanHelper xmlBeanHelper = new XMLBeanHelper();
+		if(!path.endsWith("." + PluginConstants.PLUGIN_CONTENT_TYPE))
+			analysisFile = repository.getFile(path + '/' + fileName);
+		else
+			analysisFile = repository.getFile(path);
+		if (analysisFile != null) {
+			analysisFile = repository.updateFile(analysisFile, new SimpleRepositoryFileData(
+									new ByteArrayInputStream(xmlBeanHelper.beanToXMLString(analysis).getBytes()),
+									LocaleHelper.getSystemEncoding(),
+									"application/xml"),
+							"Update to existing file");
+		} else {
+			
+			logger.info("Creating new File: " + fileName + " at " + path);
+	        
+			RepositoryFile parentFile = repository.getFile(path);
+			
+			logger.info("New File;s Parent " + parentFile.getPath());
+			
+			analysisFile = new RepositoryFile.Builder(fileName)
+					.title(RepositoryFile.ROOT_LOCALE, fileName)
+					.description(RepositoryFile.ROOT_LOCALE, fileName).build();
+			analysisFile = repository.createFile(parentFile.getId(), analysisFile,
+							new SimpleRepositoryFileData(
+									new ByteArrayInputStream(xmlBeanHelper.beanToXMLString(analysis).getBytes()),
+									LocaleHelper.getSystemEncoding(),
+									"application/xml"),
+							"New OpenI File Created..");
+			
+		}
+		
 
-		if (!filename.endsWith("." + PluginConstants.PLUGIN_CONTENT_TYPE))
-			filename += "." + PluginConstants.PLUGIN_CONTENT_TYPE;
-
-		String pentahoSolutionRoot = PentahoSystem.getApplicationContext()
-				.getSolutionRootPath();
+		/*String pentahoSolutionRoot = PentahoSystem.getApplicationContext()
+				.getSolutionPath("");
 		String analysisFilePath = pentahoSolutionRoot + "/"
 				+ ActionInfo.buildSolutionPath(solution, path, filename);
 		logger.info(analysisFilePath);
+
 		XMLBeanHelper xmlBeanHelper = new XMLBeanHelper();
-		xmlBeanHelper.beanToXMLFile(new File(analysisFilePath), analysis);
+		
+		StringBuffer buf = new StringBuffer(ISolutionRepository.SEPARATOR);
+		int result = repository.publish(pentahoSolutionRoot, solution + "/" + path, filename, xmlBeanHelper.beanToXMLString(analysis).getBytes(), overwrite); 
+		
+		if(result != 3 && result != 0)
+			throw new Exception("Error in adding file: Please confirm you have appropriate directory permissions");
+	    
+		repository.resetRepository(); */
+		//xmlBeanHelper.beanToXMLFile(new File(analysisFilePath), analysis);
 
 	}
 

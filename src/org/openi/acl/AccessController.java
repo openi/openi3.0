@@ -25,7 +25,8 @@ import org.springframework.security.userdetails.UserDetails;
 import org.xml.sax.EntityResolver;
 
 /**
- * 
+ *  a controller that applies user/role based permissions over the list of datasources
+ *  
  * @author SUJEN
  * 
  */

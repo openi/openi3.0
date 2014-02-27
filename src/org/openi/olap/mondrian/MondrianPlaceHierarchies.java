@@ -54,7 +54,7 @@ public class MondrianPlaceHierarchies extends ExtensionSupport implements
 		if (quax == null) {
 			// the hierarchy was not found on any axis
 
-			SchemaReader scr = model.getSchemaReader();
+			SchemaReader scr = model.getSchemaReader().withLocus();
 
 			return MondrianUtil.topLevelMembers(monHier, expandAllMember, scr);
 			// return top level members of the hierarchy

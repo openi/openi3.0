@@ -24,12 +24,19 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.fop.apps.Driver;
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.FormattingResults;
+import org.apache.fop.apps.MimeConstants;
 import org.apache.fop.apps.PageSequenceResults;
 import org.apache.log4j.Logger;
+import org.openi.pentaho.plugin.PluginConstants;
+import org.openi.util.plugin.PluginUtils;
+import org.pentaho.platform.api.engine.IPluginManager;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
+import org.pentaho.platform.engine.core.system.PentahoSystem;
+import org.pentaho.platform.plugin.services.pluginmgr.PluginClassLoader;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -175,13 +182,18 @@ public class PDFConverter {
 	}
 	
 	public static void convertFO2PDF(ByteArrayInputStream bain,
-			ByteArrayOutputStream baout) throws IOException, FOPException {
-		Driver driver = new Driver();
-		driver.setRenderer(Driver.RENDER_PDF);
-		driver.setOutputStream(baout);
-		driver.setInputSource(new InputSource(bain));
-		driver.run();
+			ByteArrayOutputStream baout) throws IOException, FOPException,
+			TransformerException {
+		FopFactory fopFactory = FopFactory.newInstance();
+		Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, baout);
+		TransformerFactory factory = TransformerFactory.newInstance();
+		Transformer transformer = factory.newTransformer();
+		Source src = new StreamSource(bain);
+		Result res = new SAXResult(fop.getDefaultHandler());
+		transformer.transform(src, res);
 	}
+		
+		
 	
 	public static void main(String args[]) {
 		PDFConverter converter = new PDFConverter();

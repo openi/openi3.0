@@ -12,8 +12,10 @@ import org.openi.datasource.MondrianDatasource;
 import org.openi.datasource.XMLADatasource;
 import org.openi.util.olap.MondrianHelper;
 import org.openi.util.plugin.PluginUtils;
+import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
 import org.pentaho.platform.engine.services.solution.PentahoEntityResolver;
+import org.pentaho.platform.plugin.action.mondrian.catalog.IMondrianCatalogService;
 import org.pentaho.platform.plugin.action.mondrian.catalog.MondrianCatalog;
 import org.pentaho.platform.util.xml.dom4j.XmlDom4JHelper;
 import org.apache.log4j.Logger;
@@ -37,7 +39,9 @@ public class DataSourceManager {
 	Map<String, XMLADatasource> xmlaDatasources = new HashMap<String, XMLADatasource>();
 	
 	public Map<String, MondrianDatasource> getMondrianDatasources() {
-		return mondrianDatasources;
+		if(this.mondrianDatasources == null || this.mondrianDatasources.size() <= 0)
+			loadMondrianDS();
+		return this.mondrianDatasources;
 	}
 
 	public void setMondrianDatasources(
@@ -46,7 +50,9 @@ public class DataSourceManager {
 	}
 
 	public Map<String, XMLADatasource> getXmlaDatasources() {
-		return xmlaDatasources;
+		if(this.xmlaDatasources == null || this.xmlaDatasources.size() <= 0)
+			loadXMLADS();
+		return this.xmlaDatasources;
 	}
 
 	public void setXmlaDatasources(Map<String, XMLADatasource> xmlaDatasources) {
@@ -54,7 +60,7 @@ public class DataSourceManager {
 	}
 
 	public DataSourceManager() {
-		loadDS();
+		//loadDS();
 	}
 
 	private void loadDS() {
@@ -107,7 +113,10 @@ public class DataSourceManager {
 			e.printStackTrace();
 		}	
 		*/
-		List<MondrianCatalog> mondrianCatalogs = MondrianHelper.listAvailableMondrianCatalogs();
+		
+		IMondrianCatalogService mondrianCatalogService = PentahoSystem.get(IMondrianCatalogService.class, PentahoSessionHolder.getSession());
+		List<MondrianCatalog> mondrianCatalogs = mondrianCatalogService.listCatalogs(PentahoSessionHolder.getSession(), true);
+		
 		if(mondrianCatalogs != null) {
 			Iterator<MondrianCatalog> catalogsItr = mondrianCatalogs.iterator();
 			while(catalogsItr.hasNext()) {
@@ -147,13 +156,13 @@ public class DataSourceManager {
 				xmlaDatasource.setName(name);
 				
 				Node serverURL = node.selectSingleNode("Server");
-				Node datasourceName = node.selectSingleNode("DatasourceName");
+				//Node datasourceName = node.selectSingleNode("DatasourceName");
 				Node catalog = node.selectSingleNode("Catalog");
 				Node username = node.selectSingleNode("Username");
 				Node password = node.selectSingleNode("Password");
 				
 				xmlaDatasource.setServerURL(serverURL.getStringValue());
-				xmlaDatasource.setDatasourceName(datasourceName.getStringValue());
+				//xmlaDatasource.setDatasourceName(datasourceName.getStringValue());
 				xmlaDatasource.setCatalog(catalog.getStringValue());
 				xmlaDatasource.setUsername(username.getStringValue());
 				xmlaDatasource.setPassword(password.getStringValue());
@@ -190,11 +199,11 @@ public class DataSourceManager {
 			xmlFile = new File(PentahoSystem.getApplicationContext()
 					.getSolutionPath("system/olap/datasources.xml"));
 			if(logger.isInfoEnabled())
-				logger.debug("Loaded MONDRIAN datasources from " + xmlFile.getAbsolutePath());
+				logger.info("Loaded MONDRIAN datasources ");
 		} else if (dsType == DatasourceType.XMLA) {
 			xmlFile = new File(PluginUtils.getPluginDir(), "olap/datasources.xml");
 			if(logger.isInfoEnabled())
-				logger.error("Loaded XMLA datasources from " + xmlFile.getAbsolutePath());
+				logger.info("Loaded XMLA datasources ");
 		}
 		return xmlFile;
 	}

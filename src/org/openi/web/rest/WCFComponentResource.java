@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Path("/openianalytics/api/wcfCompResource")
+@Path("/openi/api/wcfCompResource")
 public class WCFComponentResource {
 
 	private static Logger logger = Logger.getLogger(WCFComponentResource.class);
@@ -63,6 +63,7 @@ public class WCFComponentResource {
 			return this.componentService.getComponentHTML(componentType, pivotID,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(GET_COMPONENT_HTML_ERROR, e);
 			throw new RestResourceException(GET_COMPONENT_HTML_ERROR + "\r\n" + e.getMessage());
 		}
 	}
@@ -89,6 +90,7 @@ public class WCFComponentResource {
 			return this.componentService.getComponentHTML(WCFComponentType.MEMBERNAVIGATOR.toString(), pivotID,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(GET_MEMNAV_COMPONENT_HTML_ERROR, e);
 			throw new RestResourceException(GET_MEMNAV_COMPONENT_HTML_ERROR + "\r\n" + e.getMessage());
 		}
 	}
@@ -110,6 +112,7 @@ public class WCFComponentResource {
 			@DefaultValue("800") @QueryParam("chartWidth") int chartWidth,
 			@DefaultValue("350") @QueryParam("chartHeight") int chartHeight,
 			@DefaultValue("3") @QueryParam("chartType") int chartType,
+			@DefaultValue("true") @QueryParam("inline") String inline,
 			final @Context HttpServletRequest request,
 			@Context HttpServletResponse response) {
 
@@ -123,9 +126,10 @@ public class WCFComponentResource {
 					WCFUtils.getRequestContext(request, response));
 			resp = Response.ok((Object) chartCompFile);
 			resp.header("Content-Disposition",
-					"inline; filename=chart.png");
+					(inline.equals("true")) ? "inline" : "attachment" + "; filename=chart.png");
 			return resp.build();
 		} catch (Exception e) {
+			logger.error(GET_CHART_COMPONENT_ERROR, e);
 			throw new RestResourceException(GET_CHART_COMPONENT_ERROR + "\r\n" + e.getMessage());
 		}
 
@@ -144,6 +148,7 @@ public class WCFComponentResource {
 			return this.componentService.getChartComponentHTML(pivotID, chartWidth, chartHeight, chartType,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(GET_COMPONENT_HTML_ERROR, e);
 			throw new RestResourceException(GET_COMPONENT_HTML_ERROR + "\r\n" + e.getMessage());
 		}
 	}

@@ -82,20 +82,19 @@ public class ExcelExporter implements AnalysisExporter {
 			
 			String chartFilename = chartComponent.getFilename();
 			
-			/*
 			String host = context.getRequest().getServerName();
 			int port = context.getRequest().getServerPort();
 			String location = context.getRequest().getContextPath();
 			String scheme = context.getRequest().getScheme();
 
-			String chartResourceURL = scheme + "://" + host + ":" + port
-					+ location + "/content/openianalytics/api/wcfCompResource/";
+			/*String chartResourceURL = scheme + "://" + host + ":" + port
+					+ location + "/plugin/openi/api/wcfCompResource/";
 			chartResourceURL += "wcfChartComp";
-			chartResourceURL += "?pivotID=" + pivotID + "&amp;chartWidth="
+			chartResourceURL += "?inline=false&amp;pivotID=" + pivotID + "&amp;chartWidth="
 					+ analysis.getChartWidth() + "&amp;chartHeight="
 					+ analysis.getChartHeight() + "&amp;chartType="
-					+ analysis.getChartType();
-					*/
+					+ analysis.getChartType();*/
+					
 			String chartResourceURL = new File(System.getProperty("java.io.tmpdir"), chartFilename).getAbsolutePath();
 			parameters.put("chartimage", chartResourceURL);
 			parameters.put("chartheight", analysis.getChartHeight());

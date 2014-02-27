@@ -26,7 +26,7 @@ var ComponentRenderer = {
 						function(componentContainer, componentType) {
 							if (componentType == "CHART") {
 								var actionPath = "wcfChartComp";
-								var url = Rest.constructBaseURL() + Rest.WCF_COMPONENT_RESOURCE_PATH + actionPath;
+								var url = Rest.constructPluginResourceBaseURL() + Rest.WCF_COMPONENT_RESOURCE_PATH + actionPath;
 								
 								var chartWidth = jQuery("#table-container").width() - 20;
 								var chartHeight = jQuery("#table-container").height() - 20;
@@ -45,7 +45,7 @@ var ComponentRenderer = {
 									.each(dataParams, function(paramName, paramValue) {
 										dataStr += paramName + "=" + paramValue + "&";
 									});
-								url = url + "?" + dataStr + "timestamp=" + new Date().getTime();
+								url = url + "?inline=true&" + dataStr + "timestamp=" + new Date().getTime();
 								jQuery("#chart").removeAttr("src").attr("src", url);
 								/*var requestType = "GET";
 								var asyncType = false;

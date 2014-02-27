@@ -5,12 +5,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openi.acl.AccessController;
 import org.openi.acl.AccessRuleApplicableItem;
 import org.openi.acl.AccessRuleApplicableItemFilter;
 import org.openi.acl.AccessController.AccessRuleApplicableItemType;
 import org.openi.acl.AccessDeniedException;
 import org.openi.datasource.Datasource;
+import org.openi.datasource.XMLADatasource;
 import org.openi.pentaho.plugin.DataSourceManager;
 import org.openi.datasource.DatasourceType;
 
@@ -23,6 +26,8 @@ import org.openi.datasource.DatasourceType;
  */
 public class DatasourceService {
 
+	private static final Log logger = LogFactory.getLog(DatasourceService.class);
+	
 	private DataSourceManager dsManager;
 
 	public DataSourceManager getDsManager() {
@@ -52,13 +57,16 @@ public class DatasourceService {
 	 */
 	public Datasource getDatasource(String datasourceName, DatasourceType dsType)
 			throws AccessDeniedException {
+		
 		Datasource ds = null;
 		if (dsType == DatasourceType.MONDRIAN)
 			ds = (Datasource) dsManager.getMondrianDatasources().get(
 					datasourceName);
-		else if (dsType == DatasourceType.XMLA)
+		else if (dsType == DatasourceType.XMLA) {
 			ds = (Datasource) dsManager.getXmlaDatasources()
 					.get(datasourceName);
+			logger.info(((XMLADatasource) ds).getCatalog());
+		}
 		if (!accessController.isItemAccesible(
 				AccessRuleApplicableItemType.DATASOURCE, ds))
 			throw new AccessDeniedException("Access denied for datasource "

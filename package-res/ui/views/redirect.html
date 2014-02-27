@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script type="text/javascript">
+            var location = document.location.pathname;
+            var pathArray = (location + "").split("/");
+            var path = pathArray[pathArray.length - 2].replace(/:/g, "/");
+            var mode = pathArray[pathArray.length - 1];
+            
+
+            var protocol = window.location.protocol;
+    		var host = window.location.host;
+    		var baseURL = protocol + "//" + host + "/pentaho/content";
+    		
+            document.location = baseURL + "/openi/RenderOAnalysis?actionType=view&path=" + path;
+        </script>
+    </body>
+</html>

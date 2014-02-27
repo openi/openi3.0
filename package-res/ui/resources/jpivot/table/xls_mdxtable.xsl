@@ -105,6 +105,7 @@ xmlns:x="urn:schemas-microsoft-com:office:excel" >
                 <h2><xsl:value-of select="$reportTitle"/></h2>
               </xsl:if>
                <!-- Chart -->
+               <!-- 
               <xsl:if test = "$chartimage">
                     <p>
                     <img>
@@ -115,11 +116,11 @@ xmlns:x="urn:schemas-microsoft-com:office:excel" >
                         <xsl:value-of select ="$chartwidth"/>
                     </xsl:attribute>
                     <xsl:attribute name="src">
-                        <xsl:value-of select ="$chartimage"/>
+                        <xsl:value-of select ="concat(concat('url(',$chartimage),')')"/>
                     </xsl:attribute>
                     </img>
                     </p>
-              </xsl:if>
+              </xsl:if> -->
                 <!-- Table -->
               <table xmlns:x="urn:schemas-microsoft-com:office:excel" border="1">
                 <xsl:apply-templates select="head"/>

@@ -26,8 +26,8 @@ import org.openi.olap.xmla.XMLA_Model;
 import org.openi.olap.xmla.XmlaQueryTag;
 import org.openi.util.file.FileUtils;
 import org.openi.util.olap.MondrianHelper;
-import org.pentaho.platform.api.data.DatasourceServiceException;
-import org.pentaho.platform.api.data.IDatasourceService;
+import org.pentaho.platform.api.data.DBDatasourceServiceException;
+import org.pentaho.platform.api.data.IDBDatasourceService;
 import org.pentaho.platform.api.engine.ObjectFactoryException;
 import org.pentaho.platform.api.engine.PentahoAccessControlException;
 import org.pentaho.platform.engine.core.system.PentahoSystem;
@@ -66,13 +66,14 @@ public class ExploreDataService {
 	 * @throws PentahoAccessControlException
 	 * @throws DatasourceServiceException
 	 * @throws AccessDeniedException
+	 * @throws DBDatasourceServiceException 
 	 */
 	public File getEdaWidgetContent(String edaWidgetContentQuery,
 			String edaWidgetTitle, int edaWidgetCntWidth,
 			int edaWidgetCntHeight, String datasourceType,
 			String datasourceName, String cubeName,
 			RequestContext requestContext) throws FileNotFoundException,
-			OlapException, IOException, SAXException, ObjectFactoryException, PentahoAccessControlException, DatasourceServiceException, AccessDeniedException {
+			OlapException, IOException, SAXException, ObjectFactoryException, PentahoAccessControlException, AccessDeniedException, DBDatasourceServiceException {
 		File tmpDir = FileUtils.createTempDir();
 
 		Analysis analysis = new Analysis();
@@ -129,7 +130,7 @@ public class ExploreDataService {
 	}
 
 	public synchronized OlapModel getOlapModel(DatasourceType dsType, Datasource datasource,
-			String mdxQuery) throws SAXException, IOException, OlapException, ObjectFactoryException, PentahoAccessControlException, DatasourceServiceException {
+			String mdxQuery) throws SAXException, IOException, OlapException, ObjectFactoryException, PentahoAccessControlException, DBDatasourceServiceException {
 		OlapModel olapModel = null;
 		if(dsType == DatasourceType.XMLA) {
 			URL confUrl = XmlaQueryTag.class.getResource("config.xml");
@@ -148,13 +149,15 @@ public class ExploreDataService {
 			MondrianDatasource mondrianDS = (MondrianDatasource) datasource;
 			MondrianCatalog selectedCatalog = mondrianDS.getMondrianCatalog();
 			
-			String jndiDS = selectedCatalog.getEffectiveDataSource().getJndi();
+			String jndiDS = selectedCatalog.getJndi();
 
-			String catalogUri = "file://"
+			/*String catalogUri = "file://"
 					+ PentahoSystem.getApplicationContext().getSolutionPath(
 							selectedCatalog.getDefinition().substring(
-									("solution:/").length() - 1));
+									("solution:/").length() - 1)); */
 			/*String catalogUri = selectedCatalog.getDefinition().replaceAll("solution:", "file:" + PentahoSystem.getApplicationContext().getSolutionPath("") );*/
+			
+			String catalogUri = selectedCatalog.getDefinition();
 			
 			String role = MondrianHelper.doMondrianRoleMapping(catalogUri);
 			
@@ -170,16 +173,20 @@ public class ExploreDataService {
 			}
 			
 			MondrianModelFactory.Config cfg = new MondrianModelFactory.Config();
-			URL schemaUrl = new URL(catalogUri);
+			//URL schemaUrl = new URL(catalogUri);
 			cfg.setMdxQuery(mdxQuery);
-			cfg.setSchemaUrl("\"" + schemaUrl.toExternalForm() + "\"");
+			//cfg.setSchemaUrl("\"" + schemaUrl.toExternalForm() + "\"");
+			cfg.setSchemaUrl("\"" + catalogUri + "\"");
 			cfg.setDataSource(jndiDS);
 			cfg.setRole(role);
 			cfg.setDynResolver(dynResolver);
 			
-			IDatasourceService dsService = PentahoSystem
+		/*	IDatasourceService dsService = PentahoSystem
 					.getObjectFactory().get(IDatasourceService.class, null);
-			cfg.setExternalDataSource(dsService.getDataSource(jndiDS));
+			cfg.setExternalDataSource(dsService.getDataSource(jndiDS)); */
+			
+			IDBDatasourceService datasourceService = PentahoSystem.getObjectFactory().get(IDBDatasourceService.class, null);
+			cfg.setExternalDataSource(datasourceService.getDataSource(jndiDS));
 
 			URL confUrl = MondrianOlapModelTag.class.getResource("config.xml");
 			MondrianModel mm = MondrianModelFactory.instance(confUrl, cfg);

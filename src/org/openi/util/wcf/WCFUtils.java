@@ -7,6 +7,10 @@ import org.openi.util.xml.XmlUtils;
 import org.openi.wcf.component.WCFComponentType;
 import org.openi.wcf.component.WCFRender;
 
+import com.tonbeller.wcf.controller.RequestContext;
+
+import org.openi.wcf.controller.RequestContextFactoryFinder;
+
 import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -31,8 +35,6 @@ import org.w3c.dom.NodeList;
 import com.tonbeller.wcf.component.Renderable;
 import com.tonbeller.wcf.component.RoleExprHolder;
 import com.tonbeller.wcf.component.Visible;
-import com.tonbeller.wcf.controller.RequestContext;
-import com.tonbeller.wcf.controller.RequestContextFactoryFinder;
 import com.tonbeller.wcf.expr.ExprUtils;
 import com.tonbeller.wcf.token.RequestToken;
 import com.tonbeller.wcf.utils.DomUtils;
@@ -69,10 +71,13 @@ public class WCFUtils {
 	public static String componentToHTMLString(WCFRender wcfRender,
 			RequestContext context, String compId) throws Exception {
 		// Renderable comp = getComp(wcfRender, context);
+		logger.info("Trying to generate form Component for " + wcfRender.getRef());
 		Renderable comp = (Renderable) (context.getSession()
 				.getAttribute((String) wcfRender.getRef()));
-		if (comp == null)
+		if (comp == null) {
+			logger.error("couldn't generate form component form " + wcfRender.getRef() + ", it is not loaded in the session contexst");
 			return "";
+		}
 		Map params = createPredefinedParameters(context, compId,
 				wcfRender.getRef());
 		Transformer transformer = XmlUtils.getTransformer(new File(
@@ -85,6 +90,10 @@ public class WCFUtils {
 		StringWriter sw = new StringWriter();
 		StreamResult result = new StreamResult(sw);
 		transformer.transform(source, result);
+		
+		if(logger.isDebugEnabled())
+			logger.debug("Component string: " + sw.toString());
+		
 		return sw.toString();
 	}
 
@@ -198,7 +207,7 @@ public class WCFUtils {
 	}
 
 	public static RequestContext getRequestContext(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response)  {
 		return RequestContextFactoryFinder.createContext(request, response,
 				true);
 	}

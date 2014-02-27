@@ -5,27 +5,36 @@ var Rest = {
 		
 	CONTEXT_PATH : "/pentaho",
 	
-	QUERY_RESOURCE_PATH : "/openianalytics/api/queryResource/",
+	QUERY_RESOURCE_PATH : "/openi/api/queryResource/",
 	
-	ANALYSIS_RESOURCE_PATH : "/openianalytics/api/analysisResource/",
+	ANALYSIS_RESOURCE_PATH : "/openi/api/analysisResource/",
 	
-	DATASOURCE_RESOURCE_PATH : "/openianalytics/api/datasourceResource/",
+	DATASOURCE_RESOURCE_PATH : "/openi/api/datasourceResource/",
 	
-	OLAP_DISCOVER_RESOURCE_PATH : "/openianalytics/api/discoverResource/",
+	OLAP_DISCOVER_RESOURCE_PATH : "/openi/api/discoverResource/",
 	
-	WCF_COMPONENT_RESOURCE_PATH : "/openianalytics/api/wcfCompResource/",
+	WCF_COMPONENT_RESOURCE_PATH : "/openi/api/wcfCompResource/",
 	
-	EDA_RESOURCE_PATH : "/openianalytics/api/exploreDataResource/",
+	EDA_RESOURCE_PATH : "/openi/api/exploreDataResource/",
+	
+	REPO_RESOURCE_PATH : "/openi/api/solutionRepoResource/",
 	
 	sendRequest: function(restResourcePath, resourceParams, restRequestType, restAsyncType) {
-		var restURL = Rest.constructBaseURL() + restResourcePath;
+		var restURL = Rest.constructPluginResourceBaseURL() + restResourcePath;
 	    return Ajax.sendRequest(restRequestType, restURL, resourceParams, restAsyncType);
 	},
 	
-	constructBaseURL : function() {
+	constructPluginContentBaseURL : function() {
 		var protocol = window.location.protocol;
 		var host = window.location.host;
 		var baseURL = protocol + "//" + host + Rest.CONTEXT_PATH + "/content";
+		return baseURL;
+	},
+	
+	constructPluginResourceBaseURL : function() {
+		var protocol = window.location.protocol;
+		var host = window.location.host;
+		var baseURL = protocol + "//" + host + Rest.CONTEXT_PATH + "/plugin";
 		return baseURL;
 	}
 

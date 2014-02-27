@@ -2,10 +2,7 @@ package org.openi.web.rest;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +39,7 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  * 
  */
 @Component
-@Path("/openianalytics/api/queryResource")
+@Path("/openi/api/queryResource")
 public class QueryResource {
 
 	private static Logger logger = Logger.getLogger(QueryResource.class);
@@ -107,6 +104,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SWAPAXES_ERROR, e);
 			throw new RestResourceException(SWAPAXES_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -135,6 +133,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(HIDE_EMPTY_ROWS_COLS_ERROR, e);
 			throw new RestResourceException(HIDE_EMPTY_ROWS_COLS_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -163,6 +162,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SET_AXISSTYLE_ERROR, e);
 			throw new RestResourceException(SET_AXISSTYLE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -191,6 +191,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SHOW_HIDE_HIERARCHY_ERROR, e);
 			throw new RestResourceException(SHOW_HIDE_HIERARCHY_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -223,6 +224,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(ENABLE_DISABLE_DRILLTHROUGH_ERROR, e);
 			throw new RestResourceException(ENABLE_DISABLE_DRILLTHROUGH_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -243,6 +245,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(ENABLE_DISABLE_REPLACE_ERROR, e);
 			throw new RestResourceException(ENABLE_DISABLE_REPLACE_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -280,6 +283,7 @@ public class QueryResource {
 					position, WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(MOVE_HIER_ITEM_ERROR, e);
 			throw new RestResourceException(MOVE_HIER_ITEM_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -309,6 +313,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(DRILL_EXPAND_COLLAPSE_ERROR, e);
 			throw new RestResourceException(DRILL_EXPAND_COLLAPSE_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -365,6 +370,7 @@ public class QueryResource {
 			return resp.build();
 
 		} catch (Exception e) {
+			logger.error(DRILLTRHOUGH_ERROR, e);
 			throw new RestResourceException(DRILLTRHOUGH_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -400,6 +406,7 @@ public class QueryResource {
 			return Status.OK;
 
 		} catch (Exception e) {
+			logger.error(DRILLTRHOUGH_ERROR, e);
 			throw new RestResourceException(DRILLTRHOUGH_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -436,6 +443,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SORT_ERROR, e);
 			throw new RestResourceException(SORT_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -465,6 +473,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(EXPAND_MEMBER_TREE_ERROR, e);
 			throw new RestResourceException(EXPAND_MEMBER_TREE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -486,7 +495,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
-			logger.error(e);
+			logger.error(COLLAPSE_MEMBER_TREE_ERROR, e);
 			throw new RestResourceException(COLLAPSE_MEMBER_TREE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -508,6 +517,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(MEMBER_SELECTION_ERROR, e);
 			throw new RestResourceException(MEMBER_SELECTION_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -529,6 +539,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(APPLY_MEMBER_SELECTION_ERROR, e);
 			throw new RestResourceException(APPLY_MEMBER_SELECTION_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -558,6 +569,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(REVERT_MEMBER_SELECTION_ERROR, e);
 			throw new RestResourceException(REVERT_MEMBER_SELECTION_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -591,6 +603,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(REMOVE_SLICER_SELECTION_ERROR, e);
 			throw new RestResourceException(REMOVE_SLICER_SELECTION_ERROR
 					+ "\r\n" + e.getMessage());
 		}
@@ -618,6 +631,7 @@ public class QueryResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(APPLY_MDX_ERROR, e);
 			throw new RestResourceException(APPLY_MDX_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -652,6 +666,7 @@ public class QueryResource {
 					showProps, WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(APPLY_SORT_PROPERTIES_ERROR, e);
 			throw new RestResourceException(APPLY_SORT_PROPERTIES_ERROR
 					+ "\r\n" + e.getMessage());
 		}

@@ -212,8 +212,8 @@ public class MondrianModel extends MdxOlapModel implements OlapModel,
 	 * @return
 	 */
 	public SchemaReader getSchemaReader() {
-		return (queryAdapter != null) ? queryAdapter.getSchemaReader()
-				: getConnection().getSchemaReader();
+		return (queryAdapter != null) ? queryAdapter.getSchemaReader().withLocus()
+				: getConnection().getSchemaReader().withLocus();
 	}
 
 	/**
@@ -658,7 +658,7 @@ public class MondrianModel extends MdxOlapModel implements OlapModel,
 					dimension, this);
 			hHierarchies.put(uniqueName, hierarchy);
 			// make sure, that all levels are initialized
-			SchemaReader scr = getSchemaReader();
+			SchemaReader scr = getSchemaReader().withLocus();
 			List monLevels = scr.getHierarchyLevels(monHierarchy);
 			for (int i = 0; i < monLevels.size(); i++) {
 				this.addLevel((mondrian.olap.Level) monLevels.get(i), hierarchy);
@@ -754,7 +754,7 @@ public class MondrianModel extends MdxOlapModel implements OlapModel,
 		MondrianMember m = (MondrianMember) hMembers.get(uniqueName);
 		if (m != null)
 			return m;
-		final SchemaReader scr = getSchemaReader();
+		final SchemaReader scr = getSchemaReader().withLocus();
 
 		List<mondrian.olap.Id.Segment> uniqueNameParts = Util
 				.parseIdentifier(uniqueName);
@@ -1349,7 +1349,7 @@ public class MondrianModel extends MdxOlapModel implements OlapModel,
 	 */
 	protected Object createExpFromBean(ExpBean expBean) throws OlapException {
 		if (expBean.getType() == ExpBean.TYPE_TOPLEVEL_MEMBERS) {
-			SchemaReader scr = getSchemaReader();
+			SchemaReader scr = getSchemaReader().withLocus();
 			Exp[] args = createExpsFromBeans(expBean.getArgs());
 			HierarchyExpr he = (HierarchyExpr) args[0];
 			mondrian.olap.Hierarchy h = he.getHierarchy();

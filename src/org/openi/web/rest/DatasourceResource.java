@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Path("/openianalytics/api/datasourceResource")
+@Path("/openi/api/datasourceResource")
 public class DatasourceResource {
 
 	/**
@@ -40,7 +40,7 @@ public class DatasourceResource {
 	 */
 	@GET
 	@Produces({"application/json"})
-	@Path("/datasources/{datasourceType}/")
+	@Path("/datasources/{datasourceType}")
 	public Collection<Datasource> getDatasources(@PathParam("datasourceType") String datasourceType) {
 		if(datasourceType.equals(DatasourceType.XMLA.toString()))
 			return this.dsService.getDatasources(DatasourceType.XMLA);

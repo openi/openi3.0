@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Path("/openianalytics/api/discoverResource")
+@Path("/openi/api/discoverResource")
 public class OlapDiscoverResource {
 
 	private static Logger logger = Logger.getLogger(OlapDiscoverResource.class);
@@ -34,7 +34,7 @@ public class OlapDiscoverResource {
 	 */
 	@GET
 	@Produces({ "application/json" })
-	@Path("/{datasourceType}/datasources/{datasource}/cubes/")
+	@Path("/{datasourceType}/datasources/{datasource}/cubes")
 	public Collection<String> discoverCubes(
 			@PathParam("datasourceType") String datasourceType,
 			@PathParam("datasource") String datasource) {
@@ -42,6 +42,7 @@ public class OlapDiscoverResource {
 			return this.olapDiscoverService.discoverCubes(datasourceType,
 					datasource);
 		} catch (Exception e) {
+			logger.error(DISCOVER_CUBES_ERROR, e);
 			throw new RestResourceException(DISCOVER_CUBES_ERROR + "\r\n" + e.getMessage());
 		}
 	}
@@ -55,7 +56,7 @@ public class OlapDiscoverResource {
 	 */
 	@GET
 	@Produces({ "application/json" })
-	@Path("/{datasourceType}/datasources/{datasource}/{cube}/measures/")
+	@Path("/{datasourceType}/datasources/{datasource}/{cube}/measures")
 	public Collection<String> discoverMeasures(
 			@PathParam("datasourceType") String datasourceType,
 			@PathParam("datasource") String datasource,
@@ -64,6 +65,7 @@ public class OlapDiscoverResource {
 			return this.olapDiscoverService.discoverMeasures(datasourceType,
 					datasource, cube);
 		} catch (Exception e) {
+			logger.error(DISCOVER_MEASURES_ERROR, e);
 			throw new RestResourceException(DISCOVER_MEASURES_ERROR + "\r\n" + e.getMessage());
 		}
 	}

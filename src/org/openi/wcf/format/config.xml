@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<formatters>
+  <formatter name="boolean" handler="org.openi.wcf.format.BooleanHandler"/>
+
+  <formatter name="string" handler="org.openi.wcf.format.StringHandler"/>
+
+  <formatter name="reqstr" handler="org.openi.wcf.format.RequiredStringHandler" errorMessage="Please fill in this field">
+    <locale language="de" errorMessage="Bitte füllen Sie dieses Feld aus"/>
+    <locale language="en" errorMessage="Please fill in this field"/>
+    <locale language="fr" errorMessage="Veuillez compl&#x00E9;ter ce champ"/>
+  </formatter>
+
+  <formatter name="date" handler="org.openi.wcf.format.DateHandler" pattern="MM/dd/yyyy" errorMessage="{0} is not a valid Date/Time. Expected was mm/dd/yyyy">
+    <locale language="de" pattern="dd.MM.yyyy" errorMessage="{0} ist kein gültiges Datum. Erwartet wurde tt.mm.jjjj"/>
+    <locale language="en" pattern="MM/dd/yyyy" errorMessage="{0} is not a valid Date/Time. Expected was mm/dd/yyyy"/>
+    <locale language="fr" pattern="dd.MM.yyyy" errorMessage="{0} est invalide date/heure. Expect&#x00E9;t&#x00E9; a &#x00E9;t&#x00E9; jj.mm.aaaa"/>
+  </formatter>
+
+  <formatter name="dateTime" handler="org.openi.wcf.format.DateHandler" pattern="MM/dd/yyyy HH:mm:ss" errorMessage="{0} is not a valid Date/Time. Expected was mm/dd/yyyy hh:mm:ss">
+    <locale language="de" pattern="dd.MM.yyyy HH:mm:ss" errorMessage="{0} ist kein gültiges Datum/Zeit. Erwartet wurde tt.mm.jjjj hh:mm:ss"/>
+    <locale language="en" pattern="MM/dd/yyyy HH:mm:ss" errorMessage="{0} is not a valid Date/Time. Expected was mm/dd/yyyy hh:mm:ss"/>
+    <locale language="fr" pattern="dd.MM.yyyy HH:mm:ss" errorMessage="{0} est invalide date/heure. Expect&#x00E9;t&#x00E9; a &#x00E9;t&#x00E9; jj.mm.aaaa hh:mm:ss"/>
+  </formatter>
+
+  <formatter name="int" handler="org.openi.wcf.format.IntegerHandler" pattern="0" errorMessage="{0} is not a valid integer">
+    <locale language="de" pattern="0" errorMessage="{0} ist keine gültige Ganzzahl"/>
+    <locale language="en" pattern="0" errorMessage="{0} is not a valid integer"/>
+    <locale language="fr" pattern="0" errorMessage="{0} n'est pas un nombre entier valide"/>
+  </formatter>
+
+  <formatter name="posint" minValue="1" handler="org.openi.wcf.format.IntegerHandler" pattern="0" errorMessage="{0} is not a positive integer">
+    <locale language="de" minValue="1" pattern="0" errorMessage="{0} ist keine positive Ganzzahl"/>
+    <locale language="en" minValue="1" pattern="0" errorMessage="{0} is not a positive integer"/>
+    <locale language="fr" minValue="1" pattern="0" errorMessage="{0} n'est pas un nombre entier positif"/>
+  </formatter>
+
+  <formatter name="double" handler="org.openi.wcf.format.DoubleHandler" pattern="#,##0.00" errorMessage="{0} is not a valid decimal number">
+    <locale language="de" pattern="#,##0.00" errorMessage="{0} ist keine gültige Dezimalzahl"/>
+    <locale language="en" pattern="#,##0.00" errorMessage="{0} is not a valid decimal number"/>
+    <locale language="fr" pattern="#,##0.00" errorMessage="{0} n'est pas un nombre d&#x00E9;cimal valide"/>
+  </formatter>
+
+  <formatter name="nandouble" handler="org.openi.wcf.format.DoubleNaNHandler" pattern="#,##0.00" errorMessage="{0} is not a valid decimal number">
+    <locale language="de" pattern="#,##0.00" errorMessage="{0} ist keine gültige Dezimalzahl"/>
+    <locale language="en" pattern="#,##0.00" errorMessage="{0} is not a valid decimal number"/>
+    <locale language="fr" pattern="#,##0.00" errorMessage="{0} n'est pas un nombre d&#x00E9;cimal valide"/>
+  </formatter>
+
+  <formatter name="email" handler="org.openi.wcf.format.RegexHandler" pattern=".+@.+\..+" errorMessage="{0} is not a valid email address">
+    <locale language="de" pattern=".+@.+\..+" errorMessage="{0} ist keine gültige email Adresse"/>
+    <locale language="en" pattern=".+@.+\..+" errorMessage="{0} is not a valid email address"/>
+    <locale language="fr" pattern=".+@.+\..+" errorMessage="{0} n'est pas un email address valide"/>
+  </formatter>
+</formatters>

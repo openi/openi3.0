@@ -17,7 +17,9 @@ var OpenIAnalysis = {
 		OpenIAnalysis.registerToolbarBtnHandlers(analysisPivotID);
 		OpenIAnalysis.registerAOP();
 		OpenIAnalysis.adjustAxisCategorySize();
-		PUC.allowSave(true);
+		//PUC.allowSave(true);
+		var plugin = new PentahoPlugin("openi");
+		plugin.init("new");
 	},
 
 	initUI : function(analysisPivotID) {
@@ -94,7 +96,7 @@ var OpenIAnalysis = {
 		jQuery("#print-btn").click(
 				function() {
 					var actionPath = "printAnalysisReport";
-					var restResourcePath = Rest.constructBaseURL()
+					var restResourcePath = Rest.constructPluginResourceBaseURL()
 							+ Rest.ANALYSIS_RESOURCE_PATH + actionPath;
 					var restURL = restResourcePath;
 					restURL = restURL + "?pivotID=" + analysisPivotID;
@@ -129,7 +131,7 @@ var OpenIAnalysis = {
 		jQuery("#export-to-pdf").click(
 				function() {
 					var actionPath = "exportAnalysisReport";
-					var restResourcePath = Rest.constructBaseURL()
+					var restResourcePath = Rest.constructPluginResourceBaseURL()
 							+ Rest.ANALYSIS_RESOURCE_PATH + actionPath;
 					var restURL = restResourcePath;
 					restURL = restURL + "?pivotID=" + analysisPivotID
@@ -142,7 +144,7 @@ var OpenIAnalysis = {
 		jQuery("#export-to-xls").click(
 				function() {
 					var actionPath = "exportAnalysisReport";
-					var restResourcePath = Rest.constructBaseURL()
+					var restResourcePath = Rest.constructPluginResourceBaseURL()
 							+ Rest.ANALYSIS_RESOURCE_PATH + actionPath;
 					var restURL = restResourcePath;
 					restURL = restURL + "?pivotID=" + analysisPivotID
@@ -237,6 +239,63 @@ var OpenIAnalysis = {
 								return "Sending Failed..";
 							}
 						});
+		
+		/* Drillthrough customization for Segmentation feature */
+		/* --------- Start ------------------------- */
+		jQuery("#create-segment-btn").click(function(){
+			var selectedOption = $("input[name=segmentRadio]:checked").val();
+			var urlStr = $("#drillthroughURL").val();
+			urlStr = $.trim(urlStr);
+			
+			if(selectedOption == "download"){
+				OpenIAnalysis.drillThrough(
+				OpenIAnalysis.drillThroughElement,
+				OpenIAnalysis.drillThroughPivotID);
+				jQuery("#drillthrough-option-dialog").dialog('close');
+			}
+			else if(selectedOption == "publishToURL"){
+				if(urlStr != "") {
+					var webServiceURL = $("#drillthroughURL").val();
+					
+					jQuery("#drillthrough-option-dialog").dialog('close');
+					AjaxIndicator.showProcessing("Sending...");
+					var requestType = "GET";
+					var actionPath = "drillThroughSend";
+					var dataParams = {
+						'pivotID' : OpenIAnalysis.drillThroughPivotID,
+						'elementID' : OpenIAnalysis.drillThroughElement.name,
+						'webServiceURL' : webServiceURL
+					};
+					var asyncType = false;
+					var restResourcePath = Rest.QUERY_RESOURCE_PATH + actionPath;
+					
+					var result = Rest.sendRequest(restResourcePath,	dataParams, requestType, asyncType);
+					AjaxIndicator.hideProcessing();
+					if (result == 'OK') {
+						jQuery("#success-message-container")
+						.empty()
+						.html(
+						"OpenI DrillThrough Report sent successfully.");
+						jQuery("#success-message-dialog")
+						.dialog('open');
+						return false;
+					} else {					
+						return "Sending Failed..";
+					}
+				}
+			}
+			else {
+				top.mantle_openTab("Refine Segement", "Refine Segement", "/pentaho/launchsegmentation.jsp");
+			}
+			
+			
+			
+		});
+		jQuery("#drillthrough-option-cancel-btn").click(function(){
+			jQuery("#drillthrough-option-dialog").dialog('close');	
+		});
+		
+		/* --------- End ------------------------- */
 
 		jQuery("#hide-sidebar-icon").click(function(){
 			 jQuery("#sidebar").animate({
@@ -784,7 +843,7 @@ var OpenIAnalysis = {
 		 */
 
 		var actionPath = "drillThrough";
-		var restResourcePath = Rest.constructBaseURL()
+		var restResourcePath = Rest.constructPluginResourceBaseURL()
 				+ Rest.QUERY_RESOURCE_PATH + actionPath;
 
 		var restURL = restResourcePath;
@@ -853,12 +912,13 @@ var OpenIAnalysis = {
 		var restResourcePath = Rest.ANALYSIS_RESOURCE_PATH + actionPath;
 		var status = Rest.sendRequest(restResourcePath, dataParams,
 				requestType, asyncType);
-		if (status == "Error")
-			return false;
-		PUC.refreshRepo();
-		jQuery("#success-message-container").empty().html(
-				"OpenI Analysis Report saved successfully.");
-		jQuery("#success-message-dialog").dialog('open');
+		if (status != "Error") {
+			//PUC.refreshRepo();
+			jQuery("#success-message-container").empty().html(
+					"Analysis Report saved successfully.");
+			jQuery("#success-message-dialog").dialog('open');
+		}
+		return false;
 	},
 
 	applyChartProperties : function(element, analysisPivotID) {

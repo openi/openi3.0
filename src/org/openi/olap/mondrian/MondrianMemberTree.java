@@ -55,7 +55,7 @@ public class MondrianMemberTree extends ExtensionSupport implements MemberTree {
 				.getMonQuery();
 		// Use the schema reader from the query, because it contains calculated
 		// members defined in both the cube and the query.
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 		List<mondrian.olap.Member> monMembers = scr
 				.getHierarchyRootMembers(monHier);
 		ArrayList aMem = new ArrayList();
@@ -168,7 +168,7 @@ public class MondrianMemberTree extends ExtensionSupport implements MemberTree {
 		MondrianModel model = (MondrianModel) getModel();
 		// Use the schema reader from the query, because it contains calculated
 		// members defined in both the cube and the query.
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 
 		return MondrianUtil.isVisible(scr, monMember);
 	}
@@ -196,7 +196,7 @@ public class MondrianMemberTree extends ExtensionSupport implements MemberTree {
 		// hierarchy:
 		MondrianModel model = (MondrianModel) getModel();
 
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 		return scr.isDrillable(monMember);
 	}
 
@@ -221,7 +221,7 @@ public class MondrianMemberTree extends ExtensionSupport implements MemberTree {
 
 		MondrianModel model = (MondrianModel) getModel();
 
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 		List<mondrian.olap.Member> monChildren = scr
 				.getMemberChildren(monMember);
 
@@ -342,7 +342,7 @@ public class MondrianMemberTree extends ExtensionSupport implements MemberTree {
 
 		MondrianModel model = (MondrianModel) getModel();
 
-		SchemaReader scr = model.getSchemaReader();
+		SchemaReader scr = model.getSchemaReader().withLocus();
 		mondrian.olap.Member monParent = scr.getMemberParent(monMember);
 		if (monParent == null)
 			return null; // already top level

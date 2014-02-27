@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<digester-rules>
+  <pattern value="converter">
+    <object-create-rule attrname="class"/>
+    <set-properties-rule/>
+    <set-next-rule methodname="setObject"/>
+
+    <pattern value="handler">
+      <object-create-rule attrname="class"/>
+      <set-properties-rule/>
+      <set-next-rule methodname="addHandler"/>
+    </pattern>
+
+  </pattern>
+</digester-rules>

@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
+	<new-toolbar-button>4,OpenI Analysis Report,OpenI Analysis Report,content/openi/RenderOAnalysis?actionType=new</new-toolbar-button> 
 </settings>

@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Path("/openianalytics/api/exploreDataResource")
+@Path("/openi/api/exploreDataResource")
 public class ExploreDataResource {
 
 	private static Logger logger = Logger.getLogger(ExploreDataResource.class);
@@ -75,7 +75,8 @@ public class ExploreDataResource {
 			resp = respBuilder.build();
 			return resp;
 		} catch (Exception e) {
-			throw new RestResourceException(EDA_ERROR + "\r\n" + e.getMessage());
+			logger.error(EDA_ERROR, e);
+			throw new RestResourceException(EDA_ERROR + "\r\n" + e.getStackTrace());
 		}
 	}
 

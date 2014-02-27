@@ -36,7 +36,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Path("/openianalytics/api/analysisResource")
+@Path("/openi/api/analysisResource")
 @Produces("application/*")
 public class AnalysisResource {
 
@@ -94,6 +94,7 @@ public class AnalysisResource {
 			return resp.build();
 
 		} catch (Exception e) {
+			logger.error(EXPORT_REPORT_ERROR, e);
 			throw new RestResourceException(EXPORT_REPORT_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -110,6 +111,7 @@ public class AnalysisResource {
 			return this.analysisService.printAnalysisReport(pivotID,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(PRINT_REPORT_ERROR, e);
 			throw new RestResourceException(PRINT_REPORT_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -168,6 +170,7 @@ public class AnalysisResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(APPLY_CHART_PROPS_ERROR, e);
 			throw new RestResourceException(APPLY_CHART_PROPS_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -197,6 +200,7 @@ public class AnalysisResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(APPLY_PRINT_SETTINGS_ERROR, e);
 			throw new RestResourceException(APPLY_PRINT_SETTINGS_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -225,6 +229,7 @@ public class AnalysisResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SHOW_HIDE_TABLE_ERROR, e);
 			throw new RestResourceException(SHOW_HIDE_TABLE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -253,6 +258,7 @@ public class AnalysisResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SHOW_HIDE_CHART_ERROR, e);
 			throw new RestResourceException(SHOW_HIDE_CHART_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -277,6 +283,7 @@ public class AnalysisResource {
 			return this.analysisService.getSlicerValue(pivotID,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(SLICER_VALUE_ERROR, e);
 			throw new RestResourceException(SLICER_VALUE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -302,6 +309,7 @@ public class AnalysisResource {
 			return this.analysisService.getSlicerValueObjects(pivotID,
 					WCFUtils.getRequestContext(request, response));
 		} catch (Exception e) {
+			logger.error(SLICER_VALUE_ERROR, e);
 			throw new RestResourceException(SLICER_VALUE_ERROR + "\r\n"
 					+ e.getMessage());
 		}
@@ -326,6 +334,7 @@ public class AnalysisResource {
 					WCFUtils.getRequestContext(request, response));
 			return Status.OK;
 		} catch (Exception e) {
+			logger.error(SAVE_ANALYSIS_ERROR, e);
 			throw new RestResourceException(SAVE_ANALYSIS_ERROR + "\r\n"
 					+ e.getMessage());
 		}

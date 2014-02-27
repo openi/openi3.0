@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +17,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.log4j.Logger;
 import org.openi.analysis.Analysis;
 import org.openi.chart.EnhancedChartComponent;
-import org.openi.service.exception.ServiceException;
 import org.openi.util.export.PDFConverter;
 import org.openi.util.file.FileUtils;
 import org.openi.util.plugin.PluginUtils;
@@ -84,9 +82,8 @@ public class PDFExporter implements AnalysisExporter {
 			
 			//ignore the document, not returning the chart html, so need to transform chart component doc into html, using chart.xsl 
 			
-			String chartFilename = chartComponent.getFilename();
+			//String chartFilename = chartComponent.getFilename();
 			
-			/*
 			String host = context.getRequest().getServerName();
 			int port = context.getRequest().getServerPort();
 			String location = context.getRequest().getContextPath();
@@ -95,12 +92,12 @@ public class PDFExporter implements AnalysisExporter {
 			String chartResourceURL = scheme + "://" + host + ":" + port
 					+ location + "/content/openianalytics/api/wcfCompResource/";
 			chartResourceURL += "wcfChartComp";
-			chartResourceURL += "?pivotID=" + pivotID + "&amp;chartWidth="
+			chartResourceURL += "?inline=false&amp;pivotID=" + pivotID + "&amp;chartWidth="
 					+ analysis.getChartWidth() + "&amp;chartHeight="
 					+ analysis.getChartHeight() + "&amp;chartType="
 					+ analysis.getChartType();
-					*/
-			String chartResourceURL = new File(System.getProperty("java.io.tmpdir"), chartFilename).getAbsolutePath();
+					
+			//String chartResourceURL = new File(System.getProperty("java.io.tmpdir"), chartFilename).getAbsolutePath();
 			parameters.put("chartimage", chartResourceURL);
 			parameters.put("chartheight", analysis.getChartHeight());
 			parameters.put("chartwidth", analysis.getChartWidth());

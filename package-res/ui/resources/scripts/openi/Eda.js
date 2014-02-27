@@ -67,7 +67,7 @@ var Eda = {
 		jQuery.each(dataParams, function(paramName, paramValue) {
 			dataStr += paramName + "=" + paramValue + "&";
 		});
-		var url = Rest.constructBaseURL() + restResourcePath + "?" + dataStr;
+		var url = Rest.constructPluginResourceBaseURL() + restResourcePath + "?" + dataStr;
 		var img = new Image();
 		jQuery(img).load(function() {
 			jQuery("#" + edaWidgetCntID).empty().append(this);
@@ -77,8 +77,8 @@ var Eda = {
 							"Error in loading " + edaWidget.widgetTitle);
 				}).click(
 				function() {
-					window.location.href = Rest.constructBaseURL()
-							+ "/openianalysis/RenderOAnalysis?datasourceType="
+					window.location.href = Rest.constructPluginContentBaseURL()
+							+ "/openi/RenderOAnalysis?datasourceType="
 							+ datasourceType + "&datasource=" + datasource
 							+ "&cube=" + cube + "&mdx=" + encodeURIComponent(edaWidgetContentQuery)
 							+ "&actionType=new";

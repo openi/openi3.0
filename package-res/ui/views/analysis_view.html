@@ -32,6 +32,7 @@
 <script type="text/javascript" src="scripts/openi/ComponentRenderer.js"></script>
 <script type="text/javascript" src="scripts/openi/Rest.js"></script>
 <script type="text/javascript" src="scripts/openi/OlapActions.js"></script>
+<script type="text/javascript" src="scripts/pentaho/PUC.js"></script>
 
 <style>
 body {
@@ -310,7 +311,18 @@ div.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
 
 #show-sidebar { position:inherit; z-index:2; left:0; float:left; display:none; width:0px; height:100%; cursor:pointer;}
 
+
+/*---------- ----------------- ---------------- ------------------ ---------------- ------------ */
+	
+.radionBttnDiv {
+	width: 278px;
+	height: 24px;
+	border-bottom: 0px solid #ccc;
+	padding: 3px 0px 0px 0px;
+}
+
 </style>
+
 
 
 <script>
@@ -320,7 +332,6 @@ div.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
 		OpenIAnalysis.initialize(pivotID);
 	});
 </script>
-<script type="text/javascript" src="scripts/pentaho/PUC.js"></script>
 
 </head>
 <body>
@@ -485,9 +496,9 @@ div.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
 		<div id="drillthrough-table-container"></div>
 	</div>
 
-	<div id="drillthrough-option-dialog" title="Drillthrough Option">
+	<div id="drillthrough-option-dialog" title="Create Segment">
 		<div id="drillthrough-option-cnt" >
-	
+				<!--
 				<table cellspacing="5" cellpadding="2" border="0">
 					<tr>
 						<td><label for="select-datasource-type">Web Service
@@ -498,10 +509,32 @@ div.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
 					</tr>
 
 				</table>
-			
-			<div id="buttons-bar" style="margin-left:auto; margin-right:auto; width:150px;height: 30px;">
+				-->
+				<div style="height: 113px; width: 278px; ">
+					<form>					
+						<div class="radionBttnDiv">
+							<input type="radio" name="segmentRadio" value="download" checked="checked" /> Download
+						</div>
+						<div class="radionBttnDiv">
+							<input type="radio" name="segmentRadio" value="publishToURL" /> Publish to URL
+						</div>
+						<div style="height:28px; width: 200px; padding-left: 23px;">
+							<input type="text" id="drillthroughURL" size="35" />
+						</div>
+						<!-- 
+						<div class="radionBttnDiv">							
+							<input type="radio" name="segmentRadio" value="refine" /> Refine
+						</div>
+						 -->
+					</form>
+				</div>
+			<div id="buttons-bar" style="padding:0px 0px 0px 115px; width:150px; height: 35px;">
+			<!--
 				<button id="download-drillthrough-btn" class="openi-btn">Download</button>
 				<button id="send-drillthrough-btn" class="openi-btn" style="width:70px; float: right;">Send</button>
+			-->
+				<button id="create-segment-btn" class="openi-btn" style="width: 70px;">Ok</button>
+				<button id="drillthrough-option-cancel-btn" class="openi-btn" style="width:70px; float: right;">Cancel</button>
 			</div>
 
 		</div>
