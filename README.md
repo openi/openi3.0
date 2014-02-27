@@ -2,10 +2,10 @@ OpenI(Open Intelligence)
 =========================
 
 **********************************************************************
-OpenI Plugin for Pentaho 3.0.1
+OpenI Plugin for Pentaho
 **********************************************************************
 
-The OpenI plugin for Pentaho provides a simple and clean user interface to visualize data in OLAP cubes. It supports both direct Mondrian and xmla based connections like Microsoft SQL Server Analysis Services (SSAS), plus provides OpenI specific features like Explore Cube Data, custom drillthrough, adding analysis to dashboard directly etc.
+The OpenI plugin for Pentaho provides a simple and clean user interface to visualize data in OLAP cubes. It supports both direct Mondrian and xmla based connections, plus provides OpenI specific features like Explore Cube Data, custom drillthrough, etc.
 
 **********************************************************************
 Documentation
