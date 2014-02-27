@@ -11,7 +11,8 @@ Current Version
 
 Pre-requisites
 ================
-Pentaho BI Server 3.9 or greater
+Pentaho BI Server 5.0 or greater
+For Pentaho 4.8 or lesser, use plugin version 3.0.1
 You can download the latest version here http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/
 
 
