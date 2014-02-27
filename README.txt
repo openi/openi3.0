@@ -21,6 +21,14 @@ How to install/deploy on existing pentaho instance
 2. Copy the "Sample OpenI Solution" under the openipentaho folder into "<<pentaho BI server>>/pentaho-solutions" folder location.
 3. Restart the pentaho BI server
 
+Known Issues:
+==============
+1. Due to conflict issue with the new version of Apache FOP library under Pentaho web lib, PDF Export doesn't work.
+Work around:
+Copy the library to <<Plugin folder>>/lib/xmlgraphics-commons-1.3.1.jar into << pentaho BI server>>/tomcat/webapps/pentaho/WEB-INF/lib
+
+2. XMLA Datasource Type works for Mondrian XMLA only. Haven't tested yet with SSAS XMLA.
+
 
 Documentation
 =============
