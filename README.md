@@ -67,4 +67,4 @@ the OpenI project and provides commercial support and services to
 enable successful OpenI deployments.
 
 
-Copyright (c) 2005 - 2012, OpenI, Inc.
+Copyright (c) 2005 - 2014, OpenI, Inc.
